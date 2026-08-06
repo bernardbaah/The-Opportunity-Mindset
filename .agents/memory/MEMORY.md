@@ -1,0 +1,1 @@
+- [Book project context](book-context.md) — "The Opportunity Mindset" by Bernard Baah; title, 31-chapter structure, 5 frameworks, Coonected integration rules, source files
