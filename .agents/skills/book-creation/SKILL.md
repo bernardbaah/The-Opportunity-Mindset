@@ -5,132 +5,191 @@ description: Complete workflow for writing, structuring, and producing a full no
 
 # Book Creation Skill
 
-This skill auto-loads whenever a book project is active. It covers every phase from initial setup to final export.
+This skill auto-loads whenever a book project is active. Read `reference/author-context.md` and `reference/chapter-format.md` in full before writing any content.
 
 ---
 
-## 1. Auto-Load Companion Files
+## Phase 1 — Setup
 
-Before doing any book work, always read these two files in full:
+### File Structure
 
-- `.agents/skills/book-creation/reference/author-context.md` — Bernard's voice, philosophy, platforms, and the Opportunity Flywheel
-- `.agents/skills/book-creation/reference/chapter-format.md` — the exact chapter blueprint every chapter must follow
+Create everything inside a `book/` directory:
+
+```
+book/
+  index.html              ← Book reader UI
+  cover/
+    index.html            ← Cover A (primary, dark/navy)
+    index_variant2.html   ← Cover B
+    index_variant3.html   ← Cover C
+  00_outline.md
+  01_preface.md
+  02_introduction.md
+  03_about.md
+  04_chapter01.md
+  05_chapter02.md
+  ...                     ← 2-digit zero-padded prefix on every file
+  NN_conclusion.md
+  NN_appendix_a.md  through  NN_appendix_f.md
+  NN_bonus_resources.md
+```
+
+Every file uses a 2-digit zero-padded numeric prefix. The `CHAPTERS` array in `index.html` must exactly match the files written to disk.
+
+### Workflow
+
+Set up a single workflow named **"Book Reader"** running:
+
+```
+python3 -m http.server 5000 --directory book
+```
+
+Port 5000 → external port 80. Output type: webview. Use the workflows skill to configure this.
+
+### Book Reader (`book/index.html`)
+
+A self-contained HTML file that:
+
+- Fetches and renders all `.md` files using **marked.js** (CDN)
+- Has a fixed left sidebar with part/chapter navigation and a search box
+- Uses navy `#0a1628` + gold `#c9a84c` color scheme
+- Has Previous / Next buttons in a top bar
+- Shows a gold progress bar at the top of the viewport
+- Supports keyboard navigation (← → arrow keys)
+- Renders all markdown: blockquotes, tables, images, code blocks
+- The `CHAPTERS` array must exactly match actual files on disk
 
 ---
 
-## 2. Project Setup
+## Phase 2 — Front Matter (write all four in parallel)
 
-When starting a new book:
-
-1. Create the directory structure:
-   ```
-   book/
-     manuscript/
-       part-01/
-         ch-01-[slug].md
-         ch-02-[slug].md
-       part-02/
-       ...
-     frameworks/        # standalone framework explainers (Lifecycle, Equation, etc.)
-     appendices/
-     cover/
-     exports/
-   ```
-2. Create `book/README.md` with: title, subtitle, author, part/chapter map, and status tracker.
-3. Create `book/style-guide.md` with voice rules from `author-context.md`.
+| File | Contents |
+|---|---|
+| `00_outline.md` | Full TOC — all part titles, chapter titles, brief descriptions |
+| `01_preface.md` | ~1,500 words — why this book, why now, who it's for |
+| `02_introduction.md` | Sets up the book's central argument and structure |
+| `03_about.md` | About the book + full author bio |
 
 ---
 
-## 3. Chapter Drafting
+## Phase 3 — Chapters (write in parallel batches of 3–4)
 
-Follow the exact blueprint in `chapter-format.md` for every chapter. Key rules:
+See `reference/chapter-format.md` for the exact blueprint. Every chapter must contain:
 
-- **Open with a story** — a real person, a named company, or a vivid scenario. Never open with a definition.
-- **Every claim needs a reason** — no assertion without explanation or example.
-- **Frameworks get their own callout box** — indented, titled, visually distinct in Markdown (use `>` blockquotes or `---` fenced sections).
-- **"In Practice: Coonected" sidebar** — include only in chapters where Coonected is a natural fit (see author-context.md for the list). Never in psychology or pure evaluation chapters.
-- **End every chapter** with: Summary → Quiz (3–5 questions) → Exercises (2–3 actionable) → Project (1 applied challenge) → Transition sentence to next chapter.
+**A. Opening**
+- Two epigraphs: one famous quote + one original quote attributed to Bernard Baah
+- Vivid real-world story (300–500 words): named person or company, specific facts, globally diverse
 
-### Parallel drafting
+**B. Body**
+- 5–8 main `##` sections; sub-sections use `###`
+- 5+ Pexels image embeds (exact format in chapter-format.md)
+- 2+ markdown tables comparing frameworks, data, or options
+- 1+ ASCII/text diagram or structured framework visualization
+- 2 case studies per chapter (`## Case Study: Name`) — real outcomes, real companies
+- Examples from Africa, Asia, Latin America — not only US/Europe
 
-When asked to write multiple chapters, dispatch independent subagents for each chapter (via the `delegation` skill) and merge results. Do not draft chapters serially if they are in different parts.
+**C. End Matter (required on EVERY chapter, no exceptions)**
+- `## Chapter Summary` — 6–8 bold-term bullets
+- `## End-of-Chapter Quiz` — 10 questions, multiple choice with one ✓ per question
+- `## Exercises` — 4 exercises (individual, research, hands-on, synthesis)
+- `## Projects` — 2–3 projects that produce something shareable
+- Transition sentence: *"In the next chapter, we [specific preview]."*
+
+Chapter length: ~3,000–5,000 words body + ~1,500 words end matter
 
 ---
 
-## 4. Signature Frameworks
+## Phase 4 — Back Matter (write in parallel after all chapters)
 
-The five frameworks below appear throughout the book. Each has a canonical definition — never paraphrase or alter the core formula:
+| File | Contents |
+|---|---|
+| `NN_conclusion.md` | 1,500–2,000 words — synthesis, call to action, final vision. Give it a memorable title. |
+| `NN_appendix_a.md` | Categorized tools directory — 10 categories × 10 tools, with pricing notes |
+| `NN_appendix_b.md` | Step-by-step practitioner guide relevant to the book's topic |
+| `NN_appendix_c.md` | Skills framework — layered stack from beginner to expert |
+| `NN_appendix_d.md` | Self-assessment / readiness tool (individual, organizational, community) |
+| `NN_appendix_e.md` | Global resources directory — international orgs, regional bodies, learning platforms |
+| `NN_appendix_f.md` | Glossary A–Z — plain-language definitions of 60+ key terms |
+| `NN_bonus_resources.md` | 100 ideas, personal workbook, canvas, scorecard, recommended reading |
+
+---
+
+## Phase 5 — Book Covers (three variants in `book/cover/`)
+
+Each HTML cover file:
+
+- 8.5 × 11 in viewport with CSS scaling
+- Contains: title, "Bernard Baah" author credit, "Filly Coder · AI Future Series" tagline
+- Download button using **html2canvas** that exports at 2550 × 3300px (KDP ready)
+- Three visual variants: dark/navy primary + 2 alternatives
+
+No volume numbers. No publisher imprint. KDP trim size: 8.5 × 11 inches.
+
+---
+
+## Signature Frameworks
+
+Use these exact canonical forms — never paraphrase:
 
 | Framework | Canonical Form |
 |---|---|
-| Opportunity Lifecycle | Recognize → Evaluate → Create → Capture → Expand → Multiply → Share |
-| Opportunity Equation | Opportunity = Need × Timing × Capability × Awareness × Action |
-| Opportunity Pyramid | Survival → Stability → Growth → Influence → Transformation |
-| Opportunity Compass | Purpose · Potential · Preparedness · Payoff |
-| Opportunity Flywheel | Execution → Skills + Trust + Network + Resources → Greater Opportunities → repeat |
+| **Opportunity Flywheel** | Discover → Learn → Build → Connect → Create → Reinvest |
+| **Opportunity Lifecycle** | Recognize → Evaluate → Create → Capture → Expand → Multiply → Share |
+| **Opportunity Equation** | Opportunity = Need × Timing × Capability × Awareness × Action |
+| **Opportunity Pyramid** | Survival → Stability → Growth → Influence → Transformation |
+| **Opportunity Compass** | Purpose · Potential · Preparedness · Payoff |
 
-Introduce each framework the first time it appears with a full callout box. In later chapters, reference by name only.
-
----
-
-## 5. Coonected Integration Rules
-
-See `author-context.md` for the full list of strong-fit vs. weak-fit chapters.
-
-**Always:**
-- Frame Coonected as the *result* of the book's philosophy, not a product pitch
-- Use the "In Practice: Coonected" sidebar format — short, boxed, at chapter end
-- Let the principle come first; Coonected illustrates it
-
-**Never:**
-- Mention Coonected in the opening story of a chapter
-- Describe features without connecting them to the chapter's principle
-- Use promotional language ("industry-leading", "revolutionary", "game-changing")
+The **Opportunity Flywheel** is Bernard's signature framework — reference it explicitly early in the book, then use it as a recurring lens throughout.
 
 ---
 
-## 6. Appendices
+## Coonected Integration Rules
 
-Standard appendices for every book:
+See `reference/author-context.md` for chapter-level fit guidance.
 
-- **Appendix A** — The Complete Opportunity Lifecycle (full diagram description)
-- **Appendix B** — The Opportunity Equation Workbook (fill-in exercises)
-- **Appendix C** — Recommended Reading
-- **Appendix D** — About Coonected and the Filly Coder Ecosystem
-- **Appendix E** — About the Author
-
----
-
-## 7. Cover Design
-
-When producing a cover concept:
-
-1. Output a detailed text brief: dimensions (6×9 in, 300 dpi equivalent), front/back/spine layout, color palette, typography direction, tagline placement.
-2. If image generation is available, generate the front cover using the `media-generation` skill.
-3. Save to `book/cover/`.
-4. Provide a download button or presentAsset link.
-
-Cover aesthetic for Bernard's books: authoritative, clean, modern non-fiction — think HBR Press or Portfolio/Penguin. Primary palette: deep navy or charcoal + a single accent (gold, electric blue, or emerald). No stock-photo clichés.
+- Treat Coonected, Filly Jobs, Filly Learning, etc. the same as Coursera or LinkedIn — natural case study references, never promotional
+- Use the **"In Practice: Coonected"** sidebar at the end of strong-fit chapters
+- Never mention in opening stories or psychology/evaluation chapters
+- Platforms are illustrations of principles; the frameworks are the star
 
 ---
 
-## 8. Reader / Export
+## Core Themes (weave through every chapter)
 
-When the manuscript is complete:
-
-1. Concatenate all chapter `.md` files in order into `exports/[book-slug]-full-manuscript.md`.
-2. Produce a clean HTML version at `exports/[book-slug].html` with a table of contents, internal anchor links, and print-friendly CSS.
-3. Present both via `presentAsset`.
-4. Optionally produce a chapter-by-chapter word-count table in `book/README.md`.
+1. AI augments human intelligence — it doesn't replace it
+2. Talent is evenly distributed; opportunity is not — fix this
+3. Access > ownership
+4. AI reduces barriers to education, entrepreneurship, employment, and wealth
+5. The future belongs to continuous learners
+6. Technology should create inclusive prosperity, not widen inequality
+7. Networks create opportunities; AI strengthens networks at scale
 
 ---
 
-## 9. Quality Checklist (run before marking any chapter done)
+## Completion Checklist
 
-- [ ] Opens with a story, not a definition
-- [ ] All five framework names used consistently (no paraphrasing)
-- [ ] Coonected sidebar present only where appropriate
-- [ ] Chapter ends with Summary, Quiz, Exercises, Project, Transition
-- [ ] No promotional language for Coonected or Filly Coder products
-- [ ] Voice matches author-context.md guidelines (direct, purposeful, grounded)
-- [ ] Word count 2,500–4,000 words per chapter (flag if outside range)
+Before declaring the book done, verify:
+
+- [ ] Every chapter has all end-matter (summary + quiz + exercises + projects + transition sentence)
+- [ ] Every chapter has ≥ 5 Pexels image embeds
+- [ ] Book reader `CHAPTERS` array matches actual files on disk
+- [ ] Conclusion references the book's central framework
+- [ ] All 6 appendices + bonus resources are written
+- [ ] Three cover variants exist in `book/cover/`
+- [ ] "Book Reader" workflow is running; preview shows the full book
+
+---
+
+## Writing Voice
+
+| Guideline | Rule |
+|---|---|
+| Tone | Optimistic but not unrealistic |
+| Approach | Evidence-based and accessible |
+| Register | Inspirational, never promotional |
+| Utility | Practical — actionable frameworks throughout |
+| Geography | Global; include Africa, Asia, Latin America in every chapter |
+| Time horizon | Long-term trends, not short-term hype |
+| Audience | Entrepreneurs, educators, policymakers, leaders, investors, students |
+
+**On AI:** Not a magic fix-all, not an existential threat. A powerful general-purpose technology whose impact depends on how it is designed, governed, and applied.

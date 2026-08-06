@@ -1,127 +1,220 @@
 # Book Creation Instructions
-## For use with Replit Agent — Bernard Baah / Filly Coder
+## Bernard Baah / Filly Coder · AI Future Series
 
-Paste this file (or its contents) as your first message in a new Replit session, then follow it with your book title and table of contents. The agent will handle the rest.
+Copy and paste this entire block into a Replit chat when starting a new book, then follow it with: **"Book title: [your title]. Here is the table of contents: [paste]"**
 
----
-
-## Step 1 — Start a new Replit project
-
-Open a fresh Replit project. The skill files in `.agents/skills/book-creation/` will auto-load, giving the agent your voice, format, and Coonected integration rules without you having to re-explain anything.
+The agent will work through all phases without stopping between them.
 
 ---
 
-## Step 2 — Paste this message into the chat
+## The Message to Paste
 
 ```
-I'm writing a book. Here are the details:
+The table of contents I shared is for this book. Begin building it immediately
+following all instructions below — do not confirm, do not wait.
 
 Book title: [YOUR TITLE HERE]
-Subtitle: [YOUR SUBTITLE HERE]
+Subtitle:   [YOUR SUBTITLE HERE]
+Author: Bernard Baah
+Series tagline: Filly Coder · AI Future Series
 
-Here is the table of contents:
-
-[PASTE YOUR FULL TABLE OF CONTENTS HERE — parts, chapters, and subpoints]
-
-Please:
-1. Set up the full project file structure
-2. Write all chapters in parallel using the standard chapter format
-3. Apply the Coonected "In Practice" sidebar to appropriate chapters only
-4. Use the Opportunity Lifecycle, Equation, Pyramid, Compass, and Flywheel frameworks where they fit
-5. Produce a complete HTML reader with table of contents and a cover download button when done
+Start with Phase 1 (file structure + workflow + book reader), then Phase 2
+(front matter), then write chapters in parallel batches of 3–4.
+Do not stop between phases.
 ```
 
 ---
 
-## What the Agent Will Do Automatically
+## What the Agent Will Do
 
-### Project Setup
-- Creates `book/manuscript/part-XX/ch-XX-[slug].md` for every chapter
-- Creates `book/README.md` with title, structure map, and chapter status tracker
-- Creates `book/style-guide.md` with voice and tone rules
+### Phase 1 — Setup
 
-### Chapter Format (every chapter)
-Each chapter follows this exact structure:
-1. **Opening story** — a real person or scenario that embodies the chapter's idea (never a definition)
-2. **Chapter introduction** — names the concept and states the core argument
-3. **Body sections** — 3–5 headed sections with examples, reasoning, and framework callouts
-4. **"In Practice: Coonected" sidebar** — only in chapters where it fits naturally (see below)
-5. **Summary** — restates the argument + 3–5 key takeaways
-6. **Quiz** — 5 questions (recall → application → synthesis)
-7. **Exercises** — 2–3 actionable exercises
-8. **Project** — 1 applied challenge with clear deliverable
-9. **Transition sentence** — hooks the reader into the next chapter
+**File structure inside `book/`:**
+```
+book/
+  index.html              ← Book reader UI
+  cover/
+    index.html            ← Cover A (primary, dark/navy)
+    index_variant2.html   ← Cover B
+    index_variant3.html   ← Cover C
+  00_outline.md
+  01_preface.md
+  02_introduction.md
+  03_about.md
+  04_chapter01.md
+  05_chapter02.md
+  ...                     ← 2-digit zero-padded prefix on every file
+  NN_conclusion.md
+  NN_appendix_a.md  through  NN_appendix_f.md
+  NN_bonus_resources.md
+```
 
-Target: **2,700–4,200 words per chapter**
+**Workflow:** "Book Reader" running `python3 -m http.server 5000 --directory book`
 
-### Signature Frameworks
-The agent knows these exact definitions and will use them consistently:
+**Book reader (`book/index.html`):**
+- Fetches and renders all `.md` files using marked.js (CDN)
+- Fixed left sidebar with navigation + search
+- Navy `#0a1628` + gold `#c9a84c` color scheme
+- Previous / Next buttons, gold progress bar, keyboard navigation (← →)
+
+---
+
+### Phase 2 — Front Matter (written in parallel)
+
+| File | Contents |
+|---|---|
+| `00_outline.md` | Full TOC with part titles, chapter titles, brief descriptions |
+| `01_preface.md` | ~1,500 words — why this book, why now, who it's for |
+| `02_introduction.md` | Central argument and book structure |
+| `03_about.md` | About the book + full author bio |
+
+---
+
+### Phase 3 — Chapters (parallel batches of 3–4)
+
+**Every chapter contains:**
+
+**A. Opening**
+- Two epigraphs: one famous quote + one original quote attributed to Bernard Baah
+- Vivid real-world story (300–500 words): named person/company, specific facts, globally diverse
+
+**B. Body (3,000–5,000 words)**
+- 5–8 `##` sections; sub-sections use `###`
+- ≥ 5 Pexels image embeds (exact format below)
+- ≥ 2 markdown tables (framework comparisons, data, options)
+- ≥ 1 ASCII/text diagram or framework visualization
+- 2 case studies (`## Case Study: Name`) — real outcomes, at least one non-US/European
+- Examples from Africa, Asia, Latin America — not only US/Europe
+- "In Practice: Coonected" sidebar where contextually appropriate
+
+**Pexels image format (exact):**
+```
+![Alt text](https://images.pexels.com/photos/PHOTO_ID/pexels-photo-PHOTO_ID.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)
+*Figure N.X: Caption. (Source: Pexels)*
+```
+
+**C. End Matter (~1,500 words — required on every chapter)**
+
+```markdown
+## Chapter Summary
+- **Bold term** — one-sentence takeaway [6–8 bullets]
+
+## End-of-Chapter Quiz
+**1.** Question
+- a) Option
+- b) Option
+- c) Correct answer ✓
+- d) Option
+[10 questions total, one ✓ per question]
+
+## Exercises
+**Exercise N.1 — Title** [individual/reflective]
+**Exercise N.2 — Title** [research/comparative]
+**Exercise N.3 — Title** [hands-on/practical]
+**Exercise N.4 — Title** [synthesis/debate]
+
+## Projects
+**Project N.1 — Title** [produces something shareable]
+**Project N.2 — Title**
+[optional Project N.3]
+
+*In the next chapter, we [specific preview of Chapter N+1].*
+```
+
+---
+
+### Phase 4 — Back Matter (parallel, after all chapters)
+
+| File | Contents |
+|---|---|
+| `NN_conclusion.md` | 1,500–2,000 words — synthesis, call to action, memorable title |
+| `NN_appendix_a.md` | Tools directory — 10 categories × 10 tools, pricing notes |
+| `NN_appendix_b.md` | Step-by-step practitioner guide |
+| `NN_appendix_c.md` | Skills framework — beginner to expert |
+| `NN_appendix_d.md` | Self-assessment / readiness tool |
+| `NN_appendix_e.md` | Global resources directory |
+| `NN_appendix_f.md` | Glossary A–Z — 60+ key terms |
+| `NN_bonus_resources.md` | 100 ideas, workbook, canvas, scorecard, reading list |
+
+---
+
+### Phase 5 — Book Covers (3 variants in `book/cover/`)
+
+Each HTML cover:
+- 8.5 × 11 in viewport with CSS scaling
+- Title + "Bernard Baah" + "Filly Coder · AI Future Series" tagline
+- Download button using html2canvas at 2550 × 3300px (KDP ready)
+- Three variants: dark/navy primary + 2 alternatives
+
+---
+
+## Signature Frameworks (canonical — never paraphrase)
 
 | Framework | Formula |
 |---|---|
-| Opportunity Lifecycle | Recognize → Evaluate → Create → Capture → Expand → Multiply → Share |
-| Opportunity Equation | Opportunity = Need × Timing × Capability × Awareness × Action |
-| Opportunity Pyramid | Survival → Stability → Growth → Influence → Transformation |
-| Opportunity Compass | Purpose · Potential · Preparedness · Payoff |
-| Opportunity Flywheel | Execution → Skills + Trust + Network + Resources → Greater Opportunities → repeat |
+| **Opportunity Flywheel** *(signature)* | Discover → Learn → Build → Connect → Create → Reinvest |
+| **Opportunity Lifecycle** | Recognize → Evaluate → Create → Capture → Expand → Multiply → Share |
+| **Opportunity Equation** | Opportunity = Need × Timing × Capability × Awareness × Action |
+| **Opportunity Pyramid** | Survival → Stability → Growth → Influence → Transformation |
+| **Opportunity Compass** | Purpose · Potential · Preparedness · Payoff |
 
-### Coonected Integration
-The agent knows exactly where Coonected belongs and where it doesn't:
-
-**Natural fits (sidebar included):**
-- Ch 10 — Engineering Opportunity / Building platforms
-- Ch 11 — Opportunity through relationships
-- Ch 20 — Building Opportunity Systems
-- Ch 21 — Becoming an Opportunity Magnet
-- Ch 29 — AI and the Opportunity Explosion
-- Ch 30 — Creating Opportunity at Scale
-
-**Not used in:** psychology chapters (1–4) or risk/evaluation chapters (13–15)
-
-### Appendices (auto-generated)
-- A — The Complete Opportunity Lifecycle
-- B — The Opportunity Equation Workbook
-- C — Recommended Reading
-- D — About Coonected and the Filly Coder Ecosystem
-- E — About the Author
-
-### Final Export
-- Full manuscript as a single `.md` file
-- Clean HTML reader with table of contents and internal navigation
-- Cover design brief + generated cover image
-- Download button for all exports
+The Opportunity Flywheel is the primary framework — introduce it early, reference throughout.
 
 ---
 
-## Your Voice (pre-loaded — no need to repeat)
+## Filly Coder Platforms (natural case studies — not promotional)
 
-The agent already knows:
-- You are **Bernard Baah**, Founder & CEO of Filly Coder
-- Your core belief: success is determined by how well people recognize, create, and capture opportunity
-- Your writing style: direct, grounded in examples, optimistic but honest — between Gladwell and Christensen
-- What to avoid: clichés, promotional language, opening chapters with definitions
-- Your philosophy: technology should expand human potential and democratize opportunity
+| Platform | Purpose |
+|---|---|
+| **Coonected** | Flagship Global Progress Network — AI-powered ecosystem for jobs, mentors, investors, courses, communities |
+| **Filly Jobs** | AI-powered employment & career platform |
+| **Filly Learning** | AI-powered lifelong learning / courses |
+| **Filly Tutor** | Global tutoring marketplace with AI matching |
+| **Filly Edu** | School management platform |
+| **Filly HR** | HR management with AI insights |
 
----
-
-## About Coonected (pre-loaded — no need to repeat)
-
-The agent knows Coonected is:
-- An AI-powered **Progress Network** (not a social network)
-- Designed to help people make measurable progress through opportunity
-- To be referenced as an **illustration of principles**, never a product pitch
-- Featured via the **"In Practice: Coonected"** sidebar format in appropriate chapters only
+Treat these the same as Coursera or LinkedIn. Never promotional.
 
 ---
 
-## Tips
+## Core Themes (woven through every chapter)
 
-- **To write a single chapter:** "Write Chapter 5 in full."
-- **To write all chapters in a part:** "Write all chapters in Part III in parallel."
-- **To regenerate a section:** "Rewrite the opening story for Chapter 8 — make it set in Africa or Southeast Asia."
-- **To check consistency:** "Review all Coonected sidebars across the manuscript and flag any that feel promotional."
-- **To export:** "Produce the full HTML reader and cover for the book."
+1. AI augments human intelligence — it doesn't replace it
+2. Talent is evenly distributed; opportunity is not — fix this
+3. Access > ownership
+4. AI reduces barriers to education, entrepreneurship, employment, and wealth
+5. The future belongs to continuous learners
+6. Technology should create inclusive prosperity, not widen inequality
+7. Networks create opportunities; AI strengthens networks at scale
+
+**On AI:** Not a magic fix-all, not an existential threat. A powerful general-purpose technology whose impact depends on how it is designed, governed, and applied.
 
 ---
 
-*This file is part of the Filly Coder / Bernard Baah book creation system. Skill files live in `.agents/skills/book-creation/`.*
+## Writing Voice
+
+| | |
+|---|---|
+| Tone | Optimistic but not unrealistic |
+| Approach | Evidence-based and accessible |
+| Register | Inspirational, never promotional |
+| Utility | Practical — actionable frameworks throughout |
+| Geography | Global; Africa, Asia, Latin America in every chapter |
+| Audience | Entrepreneurs, educators, policymakers, leaders, investors, students |
+
+---
+
+## Completion Checklist
+
+- [ ] Every chapter has all end-matter (summary + quiz + exercises + projects + transition)
+- [ ] Every chapter has ≥ 5 Pexels image embeds
+- [ ] Book reader `CHAPTERS` array matches actual files on disk
+- [ ] Conclusion references the book's central framework
+- [ ] All 6 appendices + bonus resources written
+- [ ] Three cover variants in `book/cover/`
+- [ ] "Book Reader" workflow running; preview shows full book
+
+---
+
+*Skill files: `.agents/skills/book-creation/` — auto-load in every session on this project.*
+*AI Future Series — Bernard Baah / Filly Coder*

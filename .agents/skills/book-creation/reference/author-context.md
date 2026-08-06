@@ -1,6 +1,6 @@
 ---
 name: author-context
-description: Bernard Baah's voice, philosophy, platforms, and rules for Coonected integration throughout the book.
+description: Bernard Baah's voice, philosophy, platforms, core themes, and rules for Coonected integration throughout the book.
 ---
 
 # Author Context — Bernard Baah
@@ -13,6 +13,9 @@ Bernard Baah is the Founder and CEO of **Filly Coder**, a global software develo
 
 His answer: **opportunity** — the ability to recognize it, create it, and act on it. This belief is the philosophical foundation of everything he builds.
 
+**Series:** AI Future Series — cover tagline: "Filly Coder · AI Future Series"
+**KDP trim size:** 8.5 × 11 inches. No volume numbers. No publisher imprint.
+
 ---
 
 ## Core Philosophy
@@ -20,8 +23,22 @@ His answer: **opportunity** — the ability to recognize it, create it, and act 
 - Success is not primarily determined by talent, intelligence, luck, or hard work alone — it is determined by how well people **recognize, evaluate, create, pursue, and multiply opportunities**.
 - Technology should **expand human potential**, not replace it.
 - AI should **democratize opportunity**, not concentrate it.
-- The greatest innovations empower more people to learn, build, collaborate, and create lasting value.
+- Talent is evenly distributed; opportunity is not — technology must fix this.
 - Success is not measured by the opportunities we receive — it is measured by **the opportunities we create and help others create**.
+
+---
+
+## Core Themes (weave through every chapter)
+
+1. AI augments human intelligence — it doesn't replace it
+2. Talent is evenly distributed; opportunity is not — fix this
+3. Access > ownership
+4. AI reduces barriers to education, entrepreneurship, employment, and wealth
+5. The future belongs to continuous learners
+6. Technology should create inclusive prosperity, not widen inequality
+7. Networks create opportunities; AI strengthens networks at scale
+
+**On AI specifically:** Not a magic fix-all, not an existential threat. A powerful general-purpose technology whose impact depends on how it is designed, governed, and applied.
 
 ---
 
@@ -37,24 +54,55 @@ His answer: **opportunity** — the ability to recognize it, create it, and act 
 ### What to avoid
 - Clichés: "game-changer," "revolutionary," "industry-leading," "unlock your potential"
 - Passive voice except when intentional
-- Opening chapters with definitions or statistics
+- Opening chapters with definitions or statistics (always open with a story)
 - Bullet-point dumps without narrative connectives
 - Overly academic or jargon-heavy language
+- Promotional language for Coonected or any Filly Coder product
+
+---
+
+## Signature Framework — The Opportunity Flywheel
+
+**This is Bernard's primary signature framework.** Reference it explicitly early in every book, then use it as a recurring lens throughout.
+
+```
+Discover → Learn → Build → Connect → Create → Reinvest
+```
+
+Each stage:
+- **Discover** — identify the opportunity (recognition, curiosity, observation)
+- **Learn** — acquire the knowledge and skills to pursue it
+- **Build** — take action and create something of value
+- **Connect** — network, collaborate, find partners and mentors
+- **Create** — generate new opportunities from what was built
+- **Reinvest** — pour skills, capital, relationships, and reputation back into the cycle
+
+---
+
+## All Signature Frameworks (canonical forms — never paraphrase)
+
+| Framework | Canonical Form |
+|---|---|
+| **Opportunity Flywheel** | Discover → Learn → Build → Connect → Create → Reinvest |
+| **Opportunity Lifecycle** | Recognize → Evaluate → Create → Capture → Expand → Multiply → Share |
+| **Opportunity Equation** | Opportunity = Need × Timing × Capability × Awareness × Action |
+| **Opportunity Pyramid** | Survival → Stability → Growth → Influence → Transformation |
+| **Opportunity Compass** | Purpose · Potential · Preparedness · Payoff |
 
 ---
 
 ## The Filly Coder Ecosystem
 
-All platforms share the mission: **expand opportunity for individuals, businesses, and communities.**
+Treat all platforms the same as Coursera or LinkedIn — natural case study references, never promotional mentions.
 
 | Platform | Purpose |
 |---|---|
-| **Coonected** | AI-powered Progress Network — helps people uncover, create, share, and capture opportunities |
-| **Filly Tutor** | Global tutoring marketplace |
-| **Filly Learning** | Lifelong learning and professional development |
-| **Filly Jobs** | Connects job seekers, freelancers, employers, and service professionals |
+| **Coonected** | Flagship Global Progress Network — AI-powered ecosystem for jobs, mentors, investors, courses, communities |
+| **Filly Jobs** | AI-powered employment & career platform |
+| **Filly Learning** | AI-powered lifelong learning / courses |
+| **Filly Tutor** | Global tutoring marketplace with AI matching |
 | **Filly Edu** | School management platform |
-| **Filly HR** | Human resource management software |
+| **Filly HR** | HR management with AI insights |
 | **Hotesoft** | Hotel management platform |
 
 ---
@@ -65,7 +113,7 @@ All platforms share the mission: **expand opportunity for individuals, businesse
 
 **What makes it different:** It is an opportunity engine — built to help users discover opportunities, act on them, and build systems that generate more.
 
-**Key capabilities to reference in the book:**
+**Key capabilities to reference:**
 - AI-assisted opportunity matching
 - AI Twin / personal AI agent
 - Networking and mentorship tools
@@ -79,39 +127,34 @@ All platforms share the mission: **expand opportunity for individuals, businesse
 
 Use a short **"In Practice: Coonected"** sidebar at the end of these chapters:
 
-- **Ch 10** — Engineering Opportunity / Building platforms at scale → the actual story of building Coonected
-- **Ch 11** — Opportunity through relationships (networks, mentorship, collaboration) → maps directly to platform features
-- **Ch 20** — Building Opportunity Systems (communities, platforms, networks) → Coonected as a designed system
-- **Ch 21** — Becoming an Opportunity Magnet (personal brand, credibility, visibility) → profile and reputation tools
-- **Ch 29** — AI and the Opportunity Explosion → AI Twin, opportunity matcher, human-AI collaboration
-- **Ch 30** — Creating Opportunity at Scale → the global mission, digital platforms, education
+- Engineering/platform-building chapters → the story of building Coonected
+- Networking, mentorship, and relationship chapters → maps to platform features
+- Opportunity systems and community chapters → Coonected as a designed system
+- Personal brand and visibility chapters → profile and reputation tools
+- AI and opportunity chapters → AI Twin, opportunity matcher, human-AI collaboration
+- Opportunity at scale / global chapters → the global mission
 
 ### Where NOT to use Coonected
 
 Avoid mentions (or keep to a single neutral sentence max) in:
-
-- **Ch 1–4** — Psychology chapters need universal human stories, not tech platforms
-- **Ch 13–15** — Risk and evaluation chapters are better served by investment/business case studies
-- **Ch 16–18** — Execution chapters should use varied, non-tech examples
+- Psychology and mindset chapters — need universal human stories
+- Risk and evaluation chapters — better served by investment/business case studies
+- Execution chapters — use varied, non-tech examples
 
 ### The sidebar format
 
-```
+```markdown
 ---
 **In Practice: Coonected**
 
-[2–4 sentences showing how this chapter's principle is embodied in the platform's design or a real feature. No promotional language. End with what users can do as a result.]
+[2–4 sentences showing how this chapter's principle is embodied in the platform's design
+or a real feature. No promotional language. End with what users can do as a result.]
 
 ---
 ```
 
 ---
 
-## Coonected as a Structural Thread
+## Reader's Companion
 
-Beyond sidebars, Coonected can be referenced in:
-- **Part III intro** (Creating Opportunity) — briefly named as a platform born from the conviction that opportunities must be built
-- **Part VIII** (Future of Opportunity) — as a living example of AI-powered opportunity at scale
-- **Appendix D** — full description of Coonected and the Filly Coder ecosystem
-
-The book should also point readers to a **"Reader's Companion"** at coonected.com, where they can apply the book's frameworks using the platform's tools. This turns the book into an onboarding funnel without feeling promotional.
+Point readers to a **"Reader's Companion"** at coonected.com, where they can apply the book's frameworks using the platform's tools. This turns the book into an onboarding funnel without feeling promotional.

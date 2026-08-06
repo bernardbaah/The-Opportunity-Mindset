@@ -1,11 +1,13 @@
 ---
 name: chapter-format
-description: The exact blueprint every chapter in a Bernard Baah book must follow — opening story through transition sentence.
+description: The exact blueprint every chapter in a Bernard Baah book must follow — epigraphs through transition sentence, including Pexels images, tables, case studies, quiz, exercises, and projects.
 ---
 
 # Chapter Blueprint
 
-Every chapter follows this structure in order. Do not skip or reorder sections.
+Every chapter follows this structure in order. No section may be skipped.
+
+Target length: **~3,000–5,000 words body + ~1,500 words end matter**
 
 ---
 
@@ -14,164 +16,226 @@ Every chapter follows this structure in order. Do not skip or reorder sections.
 ```markdown
 # Chapter [N]: [Title]
 
-> *[One-sentence epigraph — a quote from a real person, or a distilled version of the chapter's core insight in quotation format. Attribute it if from a real person; use em dash + name.]*
+> *"[Famous quote relevant to the chapter theme.]"*
+> — [Person's Name]
 
-**Part [Roman numeral] — [Part Title]**
+> *"[Original quote — write this yourself. Pithy, captures the chapter's core insight. Attribute to Bernard Baah.]"*
+> — Bernard Baah
 ```
+
+Two epigraphs every time: one from a well-known figure, one original from Bernard Baah.
 
 ---
 
 ## 2. Opening Story (300–500 words)
 
-- A real person, named company, or vivid composite scenario that embodies the chapter's central idea
+- A real person or named company with specific, verifiable facts
+- **Globally diverse** — rotate through Africa, Asia, Latin America, not just US/Silicon Valley
 - Written in present or recent past tense — active, immediate
-- **Does not name the chapter's concept explicitly** — let the story speak first
-- Ends with a short paragraph (2–3 sentences) that bridges the story to the chapter's argument:
-  > *"What [person/company] discovered — often without knowing it — is the subject of this chapter."*
+- Does **not** name the chapter's concept explicitly — let the story demonstrate it
+- Ends with a 2–3 sentence bridge to the chapter's argument
 
-**Never open with:**
-- A dictionary definition
-- A statistic or data point
-- "In this chapter, we will..."
-- A rhetorical question as the first sentence
+**Never open with:** a definition, a statistic, a rhetorical question, or "In this chapter, we will..."
 
 ---
 
 ## 3. Chapter Introduction (150–250 words)
 
-- Names the central concept directly now that the story has set the stage
+- Names the central concept now that the story has set the stage
 - States the chapter's single core argument in one clear sentence
-- Previews the 3–5 key ideas the chapter will cover (brief, not a bulleted list — woven into prose)
+- Previews the key ideas in prose (not a bulleted list)
 
 ---
 
-## 4. Body Sections (1,500–2,500 words total)
+## 4. Body Sections
 
-Divide into 3–5 headed sections. Each section:
+Use **5–8 `##` sections**. Sub-sections use `###`.
 
+Each section:
 ```markdown
 ## [Section Title]
 
-[Opening sentence that states the section's claim.]
+[Opening sentence stating the section's claim.]
 
-[2–4 paragraphs developing the claim with examples, reasoning, and at least one real-world case.]
+[2–4 paragraphs developing the claim with examples and reasoning.]
 
-[Optional: Framework callout box if a signature framework is introduced here.]
+[Optional: framework callout, Pexels image, table, or ASCII diagram]
 ```
 
-### Framework Callout Box Format
+### Required body elements (distributed across sections):
 
+**Pexels images — minimum 5 per chapter**
+
+Use this exact format:
+```markdown
+![Alt text](https://images.pexels.com/photos/PHOTO_ID/pexels-photo-PHOTO_ID.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)
+*Figure N.X: Caption describing what the image illustrates. (Source: Pexels)*
+```
+
+Use real, working Pexels photo IDs relevant to the content. Distribute across sections — do not cluster at chapter end.
+
+**Markdown tables — minimum 2 per chapter**
+```markdown
+| Column A | Column B | Column C |
+|---|---|---|
+| Value | Value | Value |
+```
+Use for: framework comparisons, data summaries, option analysis, stage breakdowns.
+
+**ASCII/text diagram or framework visualization — minimum 1 per chapter**
+```
+Example:
+┌─────────────┐
+│   Discover  │──→ Learn ──→ Build ──→ Connect
+└─────────────┘                           │
+        ↑                                 ↓
+    Reinvest ←── Create ←───────────────────
+```
+
+**Case studies — exactly 2 per chapter**
+```markdown
+## Case Study: [Company or Person Name]
+
+[Opening: who they are, what problem they faced or opportunity they saw]
+
+[Middle: what they did — specific actions, decisions, timelines]
+
+[Outcome: real, quantified results where possible]
+
+[Connection: 1–2 sentences linking this case to the chapter's principle]
+```
+- Use real companies and real outcomes
+- At least one case study per chapter should be from outside the US/Europe (Africa, Asia, Latin America)
+
+**Framework callout boxes** (when introducing a signature framework):
 ```markdown
 ---
 **[Framework Name]**
 
 [One sentence defining the framework.]
 
-[The formula or lifecycle, clearly laid out — use a short list or inline notation.]
+[Formula or lifecycle, clearly laid out]
 
-[2–3 sentences on how to apply it.]
+[2–3 sentences on how to apply it]
 
 ---
 ```
 
-### Section writing rules
-- One main idea per section — do not combine unrelated points
-- Vary example sources: individuals, companies, historical events, cross-industry cases
-- At least one example per section must be from outside the US or Western Europe (global perspective)
-- Coonected sidebar appears **after the last body section**, before the Summary — only in strong-fit chapters
-
----
-
-## 5. "In Practice: Coonected" Sidebar (optional — strong-fit chapters only)
-
+**"In Practice: Coonected" sidebar** — only in strong-fit chapters (see author-context.md):
 ```markdown
 ---
 **In Practice: Coonected**
 
-[2–4 sentences connecting this chapter's principle to a specific Coonected feature or design decision. Written as illustration, not promotion. Ends with what users can do as a result.]
+[2–4 sentences connecting this chapter's principle to a specific Coonected feature or
+design decision. Illustration, not promotion. End with what users can do as a result.]
 
 ---
 ```
 
-See `author-context.md` for the list of strong-fit chapters.
-
 ---
 
-## 6. Chapter Summary (200–300 words)
+## 5. Chapter Summary
 
 ```markdown
-## Summary
+## Chapter Summary
 
-[Restate the chapter's core argument in 1–2 sentences.]
-
-[3–5 bullet points — the key takeaways a reader should remember. Each bullet is a complete sentence, not a fragment.]
-
-[Closing paragraph: 2–3 sentences connecting this chapter's ideas to the broader book theme of opportunity.]
+- **[Bold key term]** — one-sentence takeaway
+- **[Bold key term]** — one-sentence takeaway
+- **[Bold key term]** — one-sentence takeaway
+- **[Bold key term]** — one-sentence takeaway
+- **[Bold key term]** — one-sentence takeaway
+- **[Bold key term]** — one-sentence takeaway
+[6–8 bullets total]
 ```
 
 ---
 
-## 7. Quiz (5 questions)
+## 6. End-of-Chapter Quiz
+
+**10 questions, multiple choice, exactly one ✓ per question:**
 
 ```markdown
-## Quiz
+## End-of-Chapter Quiz
 
-Test your understanding:
+**1.** [Question text]
+- a) [Option]
+- b) [Option]
+- c) [Correct answer] ✓
+- d) [Option]
 
-1. [Recall question — directly from chapter content]
-2. [Comprehension question — requires understanding, not just memory]
-3. [Application question — "Given X situation, what would you do?"]
-4. [Analysis question — "Why does X lead to Y?"]
-5. [Synthesis question — connects this chapter to a prior chapter or the Opportunity Lifecycle]
+**2.** [Question text]
+...
+[Continue to Question 10]
 ```
 
-No answer key in the chapter — answers available in the appendix or reader companion.
+Question types across the 10 (vary them):
+- Recall (directly from chapter)
+- Comprehension (requires understanding)
+- Application ("Given X situation, what would you do?")
+- Analysis ("Why does X lead to Y?")
+- Synthesis (connects to another chapter or the Opportunity Flywheel)
 
 ---
 
-## 8. Exercises (2–3 exercises)
+## 7. Exercises
+
+**4 exercises per chapter:**
 
 ```markdown
 ## Exercises
 
-**Exercise 1: [Short title]**
-[Clear instruction. Takes 15–30 minutes. Can be done solo. Directly applies the chapter's main concept.]
+**Exercise N.1 — [Title]** *(Individual / Reflective)*
+[Clear instruction. 15–30 minutes. Done solo. Directly applies the chapter's main concept.]
 
-**Exercise 2: [Short title]**
-[Clear instruction. Involves reflection, writing, or a structured conversation with someone else.]
+**Exercise N.2 — [Title]** *(Research / Comparative)*
+[Involves external research, finding examples, or comparing approaches.]
 
-**Exercise 3 (optional): [Short title]**
-[A more challenging exercise for readers who want to go deeper.]
+**Exercise N.3 — [Title]** *(Hands-On / Practical)*
+[Produces a tangible output — a document, plan, analysis, or prototype.]
+
+**Exercise N.4 — [Title]** *(Synthesis / Debate)*
+[Connects this chapter's ideas to prior material or challenges the reader to defend a position.]
 ```
 
 ---
 
-## 9. Project (1 per chapter)
+## 8. Projects
+
+**2–3 projects per chapter (at least 2 required):**
 
 ```markdown
-## Chapter Project: [Title]
+## Projects
 
-**Objective:** [One sentence — what the reader will produce or achieve.]
+**Project N.1 — [Title]**
+[Produces something shareable — a report, presentation, tool, plan, or pitch.]
 
-**Time required:** [Estimate — e.g., "2–3 hours over one week"]
-
+**Objective:** [One sentence]
+**Time required:** [Estimate]
 **Steps:**
 1. [Concrete step]
 2. [Concrete step]
 3. [Concrete step]
+**Output:** [Describe the tangible deliverable]
 
-**What success looks like:** [A short description of the tangible output — a document, a conversation, a decision, a plan.]
+**Project N.2 — [Title]**
+[A collaborative or community-facing project]
+...
+
+**Project N.3 — [Title]** *(Optional — for advanced readers)*
+...
 ```
 
 ---
 
-## 10. Transition Sentence
+## 9. Transition Sentence
 
-The final line of every chapter (outside any section header) is a single sentence that creates forward momentum into the next chapter:
+The absolute final line of every chapter:
 
 ```markdown
-*In the next chapter, we turn from [this chapter's theme] to [next chapter's theme] — and explore why [one-sentence hook that makes the reader want to continue].*
+*In the next chapter, we [specific description of Chapter N+1's topic and why it follows logically from this one].*
 ```
+
+Make it specific — not "we explore the next topic" but "we turn from recognizing opportunities to the harder question of creating them from scratch — and examine why the greatest opportunities are often built, not found."
 
 ---
 
@@ -181,13 +245,13 @@ The final line of every chapter (outside any section header) is a single sentenc
 |---|---|
 | Opening story | 300–500 words |
 | Chapter introduction | 150–250 words |
-| Body sections (total) | 1,500–2,500 words |
+| Body sections (total) | 3,000–5,000 words |
+| Case studies (2 total) | 400–600 words each |
 | Coonected sidebar | 60–100 words |
-| Summary | 200–300 words |
-| Quiz | 150–200 words |
-| Exercises | 200–400 words |
-| Project | 150–250 words |
-| Transition | 1–2 sentences |
-| **Total** | **2,700–4,200 words** |
+| Chapter Summary | 150–200 words |
+| Quiz (10 questions) | 300–400 words |
+| Exercises (4) | 300–500 words |
+| Projects (2–3) | 300–500 words |
+| **Total** | **~4,500–7,000 words** |
 
-Flag any chapter outside this range before finalizing.
+Flag any chapter significantly outside this range before finalizing.
