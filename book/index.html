@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Opportunity Mindset — Bernard Baah</title>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  :root {
+    --navy: #0a1628;
+    --navy-mid: #0f2040;
+    --navy-light: #1a3060;
+    --gold: #c9a84c;
+    --gold-light: #e8c96a;
+    --white: #f5f5f0;
+    --gray: #8a9ab5;
+    --sidebar-w: 300px;
+    --topbar-h: 52px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--navy); color: var(--white); font-family: 'Georgia', serif; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+
+  /* Progress bar */
+  #progress-bar { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: var(--gold); z-index: 1000; transition: width 0.2s ease; }
+
+  /* Top bar */
+  #topbar {
+    position: fixed; top: 3px; left: 0; right: 0; height: var(--topbar-h);
+    background: var(--navy-mid); border-bottom: 1px solid var(--navy-light);
+    display: flex; align-items: center; padding: 0 1rem; gap: 1rem; z-index: 900;
+  }
+  #menu-btn { background: none; border: none; color: var(--gold); cursor: pointer; font-size: 1.4rem; padding: 4px 8px; }
+  #topbar-title { flex: 1; font-size: 0.85rem; color: var(--gray); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .nav-btn {
+    background: var(--navy-light); border: 1px solid var(--gold); color: var(--gold);
+    padding: 6px 14px; border-radius: 4px; cursor: pointer; font-size: 0.82rem;
+    transition: background 0.2s;
+  }
+  .nav-btn:hover { background: var(--gold); color: var(--navy); }
+  .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+  #chapter-counter { color: var(--gray); font-size: 0.8rem; white-space: nowrap; }
+
+  /* Layout */
+  #layout { display: flex; height: 100vh; padding-top: calc(var(--topbar-h) + 3px); }
+
+  /* Sidebar */
+  #sidebar {
+    width: var(--sidebar-w); flex-shrink: 0;
+    background: var(--navy-mid); border-right: 1px solid var(--navy-light);
+    display: flex; flex-direction: column; overflow: hidden;
+    transition: margin-left 0.3s ease;
+  }
+  #sidebar.collapsed { margin-left: calc(-1 * var(--sidebar-w)); }
+  #search-box {
+    padding: 10px 12px; border-bottom: 1px solid var(--navy-light);
+  }
+  #search-input {
+    width: 100%; background: var(--navy); border: 1px solid var(--navy-light);
+    color: var(--white); padding: 7px 10px; border-radius: 4px; font-size: 0.82rem;
+    outline: none;
+  }
+  #search-input:focus { border-color: var(--gold); }
+  #nav-list { flex: 1; overflow-y: auto; padding: 8px 0; }
+  #nav-list::-webkit-scrollbar { width: 4px; }
+  #nav-list::-webkit-scrollbar-thumb { background: var(--navy-light); border-radius: 2px; }
+  .part-header {
+    padding: 10px 16px 4px; font-size: 0.7rem; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--gold); font-family: sans-serif; font-weight: 700;
+    border-top: 1px solid var(--navy-light); margin-top: 4px;
+  }
+  .part-header:first-child { border-top: none; margin-top: 0; }
+  .nav-item {
+    display: block; width: 100%; text-align: left; background: none; border: none;
+    color: var(--gray); padding: 7px 16px 7px 20px; cursor: pointer;
+    font-size: 0.8rem; font-family: 'Georgia', serif; line-height: 1.3;
+    transition: color 0.15s, background 0.15s;
+  }
+  .nav-item:hover { color: var(--white); background: var(--navy-light); }
+  .nav-item.active { color: var(--gold); background: rgba(201,168,76,0.08); border-left: 2px solid var(--gold); padding-left: 18px; }
+  .nav-item.hidden { display: none; }
+
+  /* Content */
+  #content-wrap { flex: 1; overflow-y: auto; padding: 2rem 3rem; }
+  #content-wrap::-webkit-scrollbar { width: 6px; }
+  #content-wrap::-webkit-scrollbar-thumb { background: var(--navy-light); border-radius: 3px; }
+  #content {
+    max-width: 760px; margin: 0 auto; line-height: 1.8;
+  }
+
+  /* Loading */
+  #loading { text-align: center; padding: 4rem; color: var(--gray); font-size: 1rem; }
+  .spinner { display: inline-block; width: 32px; height: 32px; border: 3px solid var(--navy-light); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 1rem; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Markdown styles */
+  #content h1 { font-size: 2rem; color: var(--gold); margin: 0 0 1.5rem; line-height: 1.2; border-bottom: 1px solid var(--navy-light); padding-bottom: 0.75rem; }
+  #content h2 { font-size: 1.35rem; color: var(--gold-light); margin: 2.5rem 0 1rem; }
+  #content h3 { font-size: 1.1rem; color: var(--white); margin: 2rem 0 0.75rem; }
+  #content h4 { font-size: 1rem; color: var(--gray); margin: 1.5rem 0 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; font-family: sans-serif; }
+  #content p { margin: 0 0 1.2rem; }
+  #content a { color: var(--gold); text-decoration: none; }
+  #content a:hover { text-decoration: underline; }
+  #content strong { color: var(--gold-light); }
+  #content em { color: var(--gray); font-style: italic; }
+  #content ul, #content ol { margin: 0 0 1.2rem 1.5rem; }
+  #content li { margin-bottom: 0.4rem; }
+  #content blockquote {
+    border-left: 3px solid var(--gold); padding: 0.75rem 1.25rem;
+    margin: 1.5rem 0; background: rgba(201,168,76,0.06); border-radius: 0 4px 4px 0;
+    color: var(--white); font-style: italic;
+  }
+  #content blockquote p { margin: 0; }
+  #content hr { border: none; border-top: 1px solid var(--navy-light); margin: 2rem 0; }
+  #content table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
+  #content th { background: var(--navy-light); color: var(--gold); padding: 10px 14px; text-align: left; font-family: sans-serif; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  #content td { padding: 9px 14px; border-bottom: 1px solid var(--navy-light); color: var(--white); }
+  #content tr:hover td { background: rgba(255,255,255,0.03); }
+  #content code { background: var(--navy-light); padding: 2px 6px; border-radius: 3px; font-family: 'Courier New', monospace; font-size: 0.85em; color: var(--gold-light); }
+  #content pre { background: var(--navy-light); padding: 1rem; border-radius: 6px; overflow-x: auto; margin: 1.5rem 0; }
+  #content pre code { background: none; padding: 0; font-size: 0.85rem; color: var(--white); }
+  #content img { max-width: 100%; border-radius: 6px; margin: 1.5rem 0; border: 1px solid var(--navy-light); }
+  #content .framework-box {
+    background: rgba(201,168,76,0.07); border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0;
+  }
+  #content .coonected-box {
+    background: rgba(26,48,96,0.6); border: 1px solid var(--navy-light);
+    border-left: 3px solid var(--gold); border-radius: 0 6px 6px 0;
+    padding: 1rem 1.25rem; margin: 1.5rem 0; font-size: 0.92rem;
+  }
+
+  /* Chapter nav footer */
+  #chapter-footer {
+    max-width: 760px; margin: 3rem auto 1rem;
+    display: flex; gap: 1rem; padding-top: 2rem; border-top: 1px solid var(--navy-light);
+  }
+  #chapter-footer .nav-btn { flex: 1; padding: 10px; text-align: center; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    #content-wrap { padding: 1.5rem 1.25rem; }
+    #sidebar { position: fixed; top: calc(var(--topbar-h) + 3px); bottom: 0; left: 0; z-index: 800; }
+    #sidebar.collapsed { transform: translateX(-100%); margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<div id="topbar">
+  <button id="menu-btn" onclick="toggleSidebar()" title="Toggle sidebar">☰</button>
+  <div id="topbar-title">The Opportunity Mindset</div>
+  <span id="chapter-counter"></span>
+  <button class="nav-btn" id="prev-btn" onclick="navigate(-1)" disabled>← Prev</button>
+  <button class="nav-btn" id="next-btn" onclick="navigate(1)">Next →</button>
+</div>
+
+<div id="layout">
+  <div id="sidebar">
+    <div id="search-box">
+      <input id="search-input" type="text" placeholder="Search chapters…" oninput="filterNav(this.value)">
+    </div>
+    <div id="nav-list"></div>
+  </div>
+  <div id="content-wrap" onscroll="updateProgress()">
+    <div id="content">
+      <div id="loading">
+        <div class="spinner"></div><br>Loading book…
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const CHAPTERS = [
+  { file: '00_outline.md',      title: 'Table of Contents',                                          part: 'Front Matter' },
+  { file: '01_preface.md',      title: 'Preface',                                                    part: 'Front Matter' },
+  { file: '02_introduction.md', title: 'Introduction',                                               part: 'Front Matter' },
+  { file: '03_about.md',        title: 'About the Author',                                           part: 'Front Matter' },
+  { file: '04_chapter01.md',    title: 'Chapter 1: Why Some People See Opportunity Everywhere',      part: 'Part I — Developing the Opportunity Mindset' },
+  { file: '05_chapter02.md',    title: 'Chapter 2: What Is an Opportunity?',                        part: 'Part I — Developing the Opportunity Mindset' },
+  { file: '06_chapter03.md',    title: 'Chapter 3: The Anatomy of Opportunity',                     part: 'Part I — Developing the Opportunity Mindset' },
+  { file: '07_chapter04.md',    title: 'Chapter 4: The Psychology of Opportunity',                  part: 'Part I — Developing the Opportunity Mindset' },
+  { file: '08_chapter05.md',    title: 'Chapter 5: Why Most People Miss Opportunities',             part: 'Part II — Recognizing Opportunity' },
+  { file: '09_chapter06.md',    title: 'Chapter 6: Learning to See What Others Don\'t',             part: 'Part II — Recognizing Opportunity' },
+  { file: '10_chapter07.md',    title: 'Chapter 7: Where Opportunities Come From',                  part: 'Part II — Recognizing Opportunity' },
+  { file: '11_chapter08.md',    title: 'Chapter 8: Opportunity Recognition Frameworks',             part: 'Part II — Recognizing Opportunity' },
+  { file: '12_chapter09.md',    title: 'Chapter 9: Moving from Consumer to Creator',                part: 'Part III — Creating Opportunity' },
+  { file: '13_chapter10.md',    title: 'Chapter 10: Engineering Opportunity',                       part: 'Part III — Creating Opportunity' },
+  { file: '14_chapter11.md',    title: 'Chapter 11: Building Opportunity Through Relationships',    part: 'Part III — Creating Opportunity' },
+  { file: '15_chapter12.md',    title: 'Chapter 12: Making Your Own Luck',                         part: 'Part III — Creating Opportunity' },
+  { file: '16_chapter13.md',    title: 'Chapter 13: Separating Good Opportunities from Bad Ones',  part: 'Part IV — Evaluating Opportunity' },
+  { file: '17_chapter14.md',    title: 'Chapter 14: Assessing Risk and Reward',                    part: 'Part IV — Evaluating Opportunity' },
+  { file: '18_chapter15.md',    title: 'Chapter 15: Choosing the Right Opportunities',             part: 'Part IV — Evaluating Opportunity' },
+  { file: '19_chapter16.md',    title: 'Chapter 16: Taking Action',                                part: 'Part V — Capturing Opportunity' },
+  { file: '20_chapter17.md',    title: 'Chapter 17: Executing with Excellence',                    part: 'Part V — Capturing Opportunity' },
+  { file: '21_chapter18.md',    title: 'Chapter 18: Overcoming Obstacles',                         part: 'Part V — Capturing Opportunity' },
+  { file: '22_chapter19.md',    title: 'Chapter 19: Opportunity Compounding',                      part: 'Part VI — Multiplying Opportunity' },
+  { file: '23_chapter20.md',    title: 'Chapter 20: Building Opportunity Systems',                  part: 'Part VI — Multiplying Opportunity' },
+  { file: '24_chapter21.md',    title: 'Chapter 21: Becoming an Opportunity Magnet',               part: 'Part VI — Multiplying Opportunity' },
+  { file: '25_chapter22.md',    title: 'Chapter 22: Helping Others Succeed',                       part: 'Part VI — Multiplying Opportunity' },
+  { file: '26_chapter23.md',    title: 'Chapter 23: Career Opportunities',                         part: 'Part VII — Opportunity in Every Area of Life' },
+  { file: '27_chapter24.md',    title: 'Chapter 24: Business Opportunities',                       part: 'Part VII — Opportunity in Every Area of Life' },
+  { file: '28_chapter25.md',    title: 'Chapter 25: Financial Opportunities',                      part: 'Part VII — Opportunity in Every Area of Life' },
+  { file: '29_chapter26.md',    title: 'Chapter 26: Educational Opportunities',                    part: 'Part VII — Opportunity in Every Area of Life' },
+  { file: '30_chapter27.md',    title: 'Chapter 27: Leadership Opportunities',                     part: 'Part VII — Opportunity in Every Area of Life' },
+  { file: '31_chapter28.md',    title: 'Chapter 28: Global Opportunities',                         part: 'Part VII — Opportunity in Every Area of Life' },
+  { file: '32_chapter29.md',    title: 'Chapter 29: AI and the Opportunity Explosion',             part: 'Part VIII — The Future of Opportunity' },
+  { file: '33_chapter30.md',    title: 'Chapter 30: Creating Opportunity at Scale',                part: 'Part VIII — The Future of Opportunity' },
+  { file: '34_chapter31.md',    title: 'Chapter 31: Your Opportunity Legacy',                      part: 'Part VIII — The Future of Opportunity' },
+  { file: '35_conclusion.md',   title: 'Conclusion',                                               part: 'Back Matter' },
+  { file: '36_appendix_a.md',   title: 'Appendix A: Tools Directory',                              part: 'Back Matter' },
+  { file: '37_appendix_b.md',   title: 'Appendix B: Practitioner Guide',                           part: 'Back Matter' },
+  { file: '38_appendix_c.md',   title: 'Appendix C: Skills Framework',                             part: 'Back Matter' },
+  { file: '39_appendix_d.md',   title: 'Appendix D: Self-Assessment',                              part: 'Back Matter' },
+  { file: '40_appendix_e.md',   title: 'Appendix E: Global Resources',                             part: 'Back Matter' },
+  { file: '41_appendix_f.md',   title: 'Appendix F: Glossary',                                    part: 'Back Matter' },
+  { file: '42_bonus_resources.md', title: 'Bonus Resources',                                       part: 'Back Matter' },
+];
+
+let currentIdx = 0;
+let sidebarOpen = true;
+
+// Build nav
+function buildNav() {
+  const list = document.getElementById('nav-list');
+  let currentPart = null;
+  CHAPTERS.forEach((ch, i) => {
+    if (ch.part !== currentPart) {
+      currentPart = ch.part;
+      const hdr = document.createElement('div');
+      hdr.className = 'part-header';
+      hdr.textContent = ch.part;
+      list.appendChild(hdr);
+    }
+    const btn = document.createElement('button');
+    btn.className = 'nav-item';
+    btn.textContent = ch.title;
+    btn.dataset.idx = i;
+    btn.onclick = () => loadChapter(i);
+    list.appendChild(btn);
+  });
+}
+
+function filterNav(q) {
+  const items = document.querySelectorAll('.nav-item');
+  q = q.toLowerCase();
+  items.forEach(item => {
+    item.classList.toggle('hidden', q && !item.textContent.toLowerCase().includes(q));
+  });
+}
+
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  sidebarOpen = !sidebarOpen;
+  sidebar.classList.toggle('collapsed', !sidebarOpen);
+}
+
+function updateNavActive() {
+  document.querySelectorAll('.nav-item').forEach(el => {
+    el.classList.toggle('active', parseInt(el.dataset.idx) === currentIdx);
+  });
+  // Scroll active into view
+  const active = document.querySelector('.nav-item.active');
+  if (active) active.scrollIntoView({ block: 'nearest' });
+}
+
+function updateProgress() {
+  const el = document.getElementById('content-wrap');
+  const pct = (el.scrollTop / (el.scrollHeight - el.clientHeight)) * 100;
+  document.getElementById('progress-bar').style.width = Math.min(pct, 100) + '%';
+}
+
+function updateControls() {
+  document.getElementById('prev-btn').disabled = currentIdx === 0;
+  document.getElementById('next-btn').disabled = currentIdx === CHAPTERS.length - 1;
+  document.getElementById('chapter-counter').textContent = `${currentIdx + 1} / ${CHAPTERS.length}`;
+  document.getElementById('topbar-title').textContent = CHAPTERS[currentIdx].title;
+}
+
+async function loadChapter(idx) {
+  currentIdx = idx;
+  updateNavActive();
+  updateControls();
+  const content = document.getElementById('content');
+  content.innerHTML = '<div id="loading"><div class="spinner"></div><br>Loading…</div>';
+  document.getElementById('content-wrap').scrollTop = 0;
+  document.getElementById('progress-bar').style.width = '0%';
+
+  try {
+    const res = await fetch(CHAPTERS[idx].file);
+    if (!res.ok) throw new Error(`File not found: ${CHAPTERS[idx].file}`);
+    const md = await res.text();
+    content.innerHTML = marked.parse(md) + buildFooter(idx);
+  } catch (e) {
+    content.innerHTML = `<div style="color:var(--gray);padding:2rem">
+      <h2 style="color:var(--gold)">Coming Soon</h2>
+      <p>This chapter is being written. Check back shortly.</p>
+      <p style="font-size:0.85rem;margin-top:1rem;opacity:0.6">${e.message}</p>
+      ${buildFooter(idx)}
+    </div>`;
+  }
+}
+
+function buildFooter(idx) {
+  const prev = idx > 0 ? `<button class="nav-btn" onclick="navigate(-1)">← ${CHAPTERS[idx-1].title}</button>` : '<span></span>';
+  const next = idx < CHAPTERS.length - 1 ? `<button class="nav-btn" onclick="navigate(1)">${CHAPTERS[idx+1].title} →</button>` : '<span></span>';
+  return `<div id="chapter-footer">${prev}${next}</div>`;
+}
+
+function navigate(dir) {
+  const next = currentIdx + dir;
+  if (next >= 0 && next < CHAPTERS.length) loadChapter(next);
+}
+
+// Keyboard nav
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT') return;
+  if (e.key === 'ArrowRight') navigate(1);
+  if (e.key === 'ArrowLeft') navigate(-1);
+});
+
+// Init
+buildNav();
+loadChapter(0);
+</script>
+</body>
+</html>

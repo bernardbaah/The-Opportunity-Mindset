@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Opportunity Mindset – Cover C</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #e8e4dc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding: 20px;
+      font-family: 'Source Sans 3', sans-serif;
+    }
+
+    #dl-btn {
+      margin-bottom: 16px;
+      padding: 12px 28px;
+      background: #1a2744;
+      color: #f5f0e8;
+      border: none;
+      border-radius: 2px;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: background 0.2s;
+    }
+    #dl-btn:hover { background: #253660; }
+
+    #cover {
+      width: 850px;
+      height: 1100px;
+      background: #f7f4ee;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Top navy header band */
+    .header-band {
+      width: 100%;
+      background: #1a2744;
+      padding: 28px 70px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+      z-index: 2;
+    }
+
+    .header-series {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      color: rgba(201,168,76,0.8);
+      text-transform: uppercase;
+    }
+
+    .header-rule {
+      flex: 1;
+      height: 1px;
+      background: rgba(201,168,76,0.3);
+      margin: 0 20px;
+    }
+
+    .header-logo {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      color: rgba(201,168,76,0.7);
+      text-transform: uppercase;
+    }
+
+    /* Main content area */
+    .main-content {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 50px 70px 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Title block */
+    .title-block {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 38px;
+    }
+
+    .eyebrow {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.35em;
+      color: #c9a84c;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .main-title {
+      font-family: 'Lora', serif;
+      font-size: 68px;
+      font-weight: 700;
+      color: #1a2744;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+    }
+
+    .title-ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin: 20px auto;
+    }
+    .title-ornament .ornament-line {
+      width: 70px;
+      height: 1px;
+      background: #c9a84c;
+    }
+    .title-ornament .diamond {
+      width: 8px;
+      height: 8px;
+      background: #c9a84c;
+      transform: rotate(45deg);
+    }
+
+    .subtitle {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 18px;
+      font-weight: 400;
+      color: #4a5568;
+      line-height: 1.55;
+      letter-spacing: 0.015em;
+    }
+
+    /* Key/Door graphic */
+    .graphic-wrap {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 10px 0 18px;
+      flex-shrink: 0;
+    }
+    .graphic-wrap svg {
+      width: 320px;
+      height: 320px;
+    }
+
+    /* Pull quote */
+    .pull-quote {
+      width: 100%;
+      border-left: 3px solid #c9a84c;
+      padding: 10px 0 10px 22px;
+      margin-bottom: 0;
+    }
+    .pull-quote p {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 13.5px;
+      color: #5a6478;
+      line-height: 1.6;
+      max-width: 520px;
+    }
+
+    /* Bottom footer band */
+    .footer-band {
+      width: 100%;
+      background: #1a2744;
+      padding: 22px 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+      margin-top: auto;
+      z-index: 2;
+    }
+
+    .author-block {}
+
+    .author-label {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 8px;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      color: rgba(201,168,76,0.6);
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    .author-name {
+      font-family: 'Lora', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: #ffffff;
+      letter-spacing: 0.04em;
+    }
+
+    .footer-right {
+      text-align: right;
+    }
+    .footer-series {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 8px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      color: rgba(201,168,76,0.6);
+      text-transform: uppercase;
+      line-height: 1.9;
+    }
+
+    /* Subtle paper texture lines */
+    .texture-overlay {
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 59px,
+        rgba(180,170,150,0.06) 60px
+      );
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Gold accent corner ornament */
+    .corner-accent {
+      position: absolute;
+      bottom: 86px;
+      right: 40px;
+      z-index: 3;
+      opacity: 0.18;
+    }
+  </style>
+</head>
+<body>
+
+  <button id="dl-btn" onclick="downloadCover()">⬇ Download Cover (KDP Ready)</button>
+
+  <div id="cover">
+    <div class="texture-overlay"></div>
+
+    <!-- Corner accent -->
+    <svg class="corner-accent" width="90" height="90" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="90" height="90" fill="none" stroke="#c9a84c" stroke-width="1"/>
+      <rect x="8" y="8" width="74" height="74" fill="none" stroke="#c9a84c" stroke-width="0.5"/>
+      <line x1="0" y1="0" x2="90" y2="90" stroke="#c9a84c" stroke-width="0.4"/>
+      <line x1="90" y1="0" x2="0" y2="90" stroke="#c9a84c" stroke-width="0.4"/>
+    </svg>
+
+    <!-- Header band -->
+    <div class="header-band">
+      <div class="header-series">AI Future Series</div>
+      <div class="header-rule"></div>
+      <div class="header-logo">Filly Coder</div>
+    </div>
+
+    <!-- Main content -->
+    <div class="main-content">
+
+      <!-- Title -->
+      <div class="title-block">
+        <div class="eyebrow">A Definitive Guide</div>
+        <div class="main-title">The Opportunity<br>Mindset</div>
+        <div class="title-ornament">
+          <div class="ornament-line"></div>
+          <div class="diamond"></div>
+          <div class="ornament-line"></div>
+        </div>
+        <div class="subtitle">How to Recognize, Create,<br>and Capture Opportunity</div>
+      </div>
+
+      <!-- Golden Key / Open Door Graphic -->
+      <div class="graphic-wrap">
+        <svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="keyGold" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#e8c84a"/>
+              <stop offset="50%" stop-color="#c9a84c"/>
+              <stop offset="100%" stop-color="#a07830"/>
+            </linearGradient>
+            <linearGradient id="doorGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#ddd8cc"/>
+              <stop offset="100%" stop-color="#c8c2b4"/>
+            </linearGradient>
+            <linearGradient id="lightGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#fffbe8" stop-opacity="0.0"/>
+              <stop offset="40%" stop-color="#fffbe8" stop-opacity="0.95"/>
+              <stop offset="100%" stop-color="#fffbe8" stop-opacity="0.0"/>
+            </linearGradient>
+            <filter id="keyShadow">
+              <feDropShadow dx="2" dy="3" stdDeviation="4" flood-color="#a07830" flood-opacity="0.35"/>
+            </filter>
+            <filter id="glowLight">
+              <feGaussianBlur stdDeviation="8" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+
+          <!-- Light rays from door opening -->
+          <g opacity="0.55" filter="url(#glowLight)">
+            <polygon points="160,60 128,180 192,180" fill="#fffbe8" opacity="0.5"/>
+            <polygon points="160,60 108,200 138,200" fill="#fffbe8" opacity="0.25"/>
+            <polygon points="160,60 182,200 212,200" fill="#fffbe8" opacity="0.25"/>
+          </g>
+
+          <!-- Door frame (outer) -->
+          <rect x="85" y="70" width="150" height="210" rx="4" ry="4"
+                fill="#1a2744" stroke="#1a2744" stroke-width="2"/>
+
+          <!-- Door panels (open left side) -->
+          <!-- Left door (swinging open) -->
+          <g transform="translate(85,70) skewX(-18)">
+            <rect x="0" y="0" width="70" height="210" rx="3" ry="3" fill="url(#doorGrad)" stroke="#b8b0a0" stroke-width="1"/>
+            <!-- Panel inset top -->
+            <rect x="8" y="12" width="54" height="80" rx="2" fill="none" stroke="rgba(180,172,160,0.7)" stroke-width="1"/>
+            <!-- Panel inset bottom -->
+            <rect x="8" y="104" width="54" height="94" rx="2" fill="none" stroke="rgba(180,172,160,0.7)" stroke-width="1"/>
+          </g>
+
+          <!-- Right door (closed) -->
+          <rect x="158" y="70" width="77" height="210" rx="3" ry="3" fill="url(#doorGrad)" stroke="#b8b0a0" stroke-width="1"/>
+          <!-- Right door panels -->
+          <rect x="166" y="82" width="61" height="82" rx="2" fill="none" stroke="rgba(180,172,160,0.7)" stroke-width="1"/>
+          <rect x="166" y="174" width="61" height="94" rx="2" fill="none" stroke="rgba(180,172,160,0.7)" stroke-width="1"/>
+
+          <!-- Bright interior glow (what's beyond the open door) -->
+          <rect x="85" y="70" width="73" height="210" fill="url(#lightGrad)" opacity="0.7"/>
+
+          <!-- Door knob right door -->
+          <circle cx="164" cy="180" r="5.5" fill="url(#keyGold)" stroke="#a07830" stroke-width="0.8"/>
+          <circle cx="164" cy="180" r="2.5" fill="#e8d888"/>
+
+          <!-- Door frame border -->
+          <rect x="85" y="70" width="150" height="210" rx="4" ry="4"
+                fill="none" stroke="#1a2744" stroke-width="4"/>
+          <!-- Frame inner bevel -->
+          <rect x="89" y="74" width="142" height="202" rx="3" ry="3"
+                fill="none" stroke="rgba(201,168,76,0.4)" stroke-width="1"/>
+
+          <!-- Decorative arch on frame top -->
+          <path d="M 89 74 Q 160 40 231 74" fill="none" stroke="rgba(201,168,76,0.5)" stroke-width="1.5"/>
+
+          <!-- THE GOLDEN KEY -->
+          <!-- Key bow (ring) -->
+          <g filter="url(#keyShadow)">
+            <circle cx="195" cy="235" r="22" fill="none" stroke="url(#keyGold)" stroke-width="7"/>
+            <circle cx="195" cy="235" r="11" fill="none" stroke="url(#keyGold)" stroke-width="2.5"/>
+            <!-- Key blade (shaft) -->
+            <rect x="192" y="254" width="6" height="40" rx="3" fill="url(#keyGold)"/>
+            <!-- Key teeth -->
+            <rect x="198" y="270" width="10" height="5" rx="1.5" fill="url(#keyGold)"/>
+            <rect x="198" y="282" width="7"  height="4" rx="1.5" fill="url(#keyGold)"/>
+            <rect x="198" y="292" width="10" height="4" rx="1.5" fill="url(#keyGold)"/>
+          </g>
+
+          <!-- "OPPORTUNITY AWAITS" bottom text -->
+          <text x="160" y="306" text-anchor="middle"
+                font-family="Lora,serif" font-style="italic" font-size="10.5"
+                fill="#c9a84c" letter-spacing="0.18em" opacity="0.85">Opportunity Awaits</text>
+
+          <!-- Decorative dots -->
+          <circle cx="130" cy="306" r="2" fill="#c9a84c" opacity="0.5"/>
+          <circle cx="190" cy="306" r="2" fill="#c9a84c" opacity="0.5"/>
+
+        </svg>
+      </div>
+
+      <!-- Pull quote -->
+      <div class="pull-quote">
+        <p>"Every great achievement begins with the ability to see what others overlook — and the courage to act on it."</p>
+      </div>
+
+    </div>
+
+    <!-- Footer band -->
+    <div class="footer-band">
+      <div class="author-block">
+        <div class="author-label">Written by</div>
+        <div class="author-name">Bernard Baah</div>
+      </div>
+      <div class="footer-right">
+        <div class="footer-series">Filly Coder</div>
+        <div class="footer-series">AI Future Series</div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <script>
+    function downloadCover() {
+      const btn = document.getElementById('dl-btn');
+      btn.style.display = 'none';
+      html2canvas(document.getElementById('cover'), {
+        scale: 3,
+        useCORS: true,
+        width: 850,
+        height: 1100,
+        backgroundColor: '#f7f4ee'
+      }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'opportunity-mindset-cover-C.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        btn.style.display = 'block';
+      });
+    }
+  </script>
+</body>
+</html>
