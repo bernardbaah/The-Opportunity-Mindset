@@ -3,444 +3,313 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Opportunity Mindset – Cover Variant 2</title>
+  <title>Cover B — The Opportunity Mindset</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Playfair+Display:wght@700;800;900&family=DM+Sans:wght@300;400;500&display=swap');
-
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      background: #e8e4dc;
+      background: #111;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: center;
       min-height: 100vh;
-      padding: 40px 20px 60px;
-      font-family: 'DM Sans', sans-serif;
+      padding: 40px 20px;
     }
 
-    /* ── COVER ─────────────────────────────────────────────────── */
+    /* ── Cover shell ─────────────────────────────────────── */
     #cover {
       position: relative;
       width: 850px;
       height: 1100px;
-      background-color: #faf8f3;
+      background: #0D0B09;
       overflow: hidden;
-      box-shadow:
-        0 4px 6px rgba(0,0,0,0.06),
-        0 12px 40px rgba(0,0,0,0.14),
-        0 30px 80px rgba(0,0,0,0.10);
     }
 
-    /* Subtle texture layer */
-    #cover::before {
+    /* Vignette */
+    #cover::after {
       content: '';
       position: absolute;
       inset: 0;
-      background-image:
-        repeating-linear-gradient(
-          0deg,
-          transparent,
-          transparent 3px,
-          rgba(10,22,40,0.012) 3px,
-          rgba(10,22,40,0.012) 4px
-        );
+      background: radial-gradient(ellipse at 50% 40%, transparent 35%, rgba(0,0,0,0.45) 100%);
       pointer-events: none;
-      z-index: 0;
+      z-index: 3;
     }
 
-    /* Top spine rule */
-    .spine-top {
+    /* Warm midtone glow behind title */
+    .glow {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 7px;
-      background: #0a1628;
-    }
-
-    /* Bottom spine rule */
-    .spine-bottom {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 7px;
-      background: #0a1628;
-    }
-
-    /* ── INNER LAYOUT ───────────────────────────────────────────── */
-    .cover-inner {
-      position: relative;
+      top: 220px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 400px;
+      background: radial-gradient(ellipse, rgba(180,130,50,0.07) 0%, transparent 70%);
+      pointer-events: none;
       z-index: 1;
+    }
+
+    /* ── Inner layout ────────────────────────────────────── */
+    .inner {
+      position: relative;
+      z-index: 4;
       width: 100%;
       height: 100%;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      padding: 0 82px;
+      align-items: center;
+      text-align: center;
+      padding: 58px 68px 54px;
     }
 
-    /* ── SERIES TAGLINE (top) ───────────────────────────────────── */
-    .series-top {
-      margin-top: 40px;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 400;
-      font-size: 9.5px;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: #c9a84c;
-    }
-
-    /* ── TITLE BLOCK ────────────────────────────────────────────── */
-    .title-block {
-      margin-top: 46px;
-      flex-shrink: 0;
-    }
-
-    .title-article {
-      display: block;
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-style: italic;
-      font-size: 52px;
-      letter-spacing: 0.06em;
-      color: #0a1628;
-      line-height: 1;
-      margin-bottom: 2px;
-    }
-
-    .title-main {
-      display: block;
-      font-family: 'Playfair Display', serif;
-      font-weight: 900;
-      font-size: 96px;
-      letter-spacing: -0.01em;
-      color: #0a1628;
-      line-height: 0.92;
-      word-spacing: -4px;
-    }
-
-    .title-main .word-opportunity {
-      display: block;
-    }
-
-    .title-main .word-mindset {
-      display: block;
-      position: relative;
-    }
-
-    /* Gold underline beneath "Mindset" */
-    .title-main .word-mindset::after {
-      content: '';
-      display: block;
-      width: 100%;
-      height: 4px;
-      background: linear-gradient(90deg, #c9a84c 0%, #e8c96a 50%, #c9a84c 100%);
-      margin-top: 10px;
-      border-radius: 2px;
-    }
-
-    /* ── PRIMARY DIVIDER ────────────────────────────────────────── */
-    .divider-block {
-      margin-top: 44px;
+    /* Top rule */
+    .top-rule {
       width: 100%;
       display: flex;
       align-items: center;
-      gap: 16px;
-      flex-shrink: 0;
+      gap: 0;
+      margin-bottom: 0;
     }
-
-    .divider-rule {
+    .top-rule-line {
       flex: 1;
-      height: 2px;
-      background: #0a1628;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #C8923C, transparent);
     }
 
-    .divider-diamond {
-      width: 8px;
-      height: 8px;
-      background: #c9a84c;
-      transform: rotate(45deg);
-      flex-shrink: 0;
+    /* Series */
+    .series {
+      font-family: 'Inter', sans-serif;
+      font-size: 9.5px;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: #C8923C;
+      opacity: 0.65;
+      margin: 20px 0;
     }
 
-    /* ── ILLUSTRATION: COMPASS ──────────────────────────────────── */
-    .illustration-wrapper {
-      margin-top: 50px;
+    .series-rule {
+      width: 40px;
+      height: 1px;
+      background: rgba(200,146,60,0.35);
+      margin: 0 auto;
+    }
+
+    /* Title */
+    .title-area {
+      margin-top: auto;
+      width: 100%;
+    }
+
+    .the {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 38px;
+      color: #9A8870;
+      letter-spacing: 0.08em;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .opportunity {
+      font-family: 'EB Garamond', serif;
+      font-weight: 800;
+      font-size: 98px;
+      color: #EDE0CC;
+      line-height: 0.88;
+      letter-spacing: -0.01em;
+      display: block;
+    }
+
+    .mindset {
+      font-family: 'EB Garamond', serif;
+      font-weight: 800;
+      font-size: 98px;
+      color: #EDE0CC;
+      line-height: 0.88;
+      letter-spacing: -0.01em;
+      display: block;
+      margin-bottom: 40px;
+    }
+
+    /* Gold rule below title */
+    .mid-rule {
       width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
-      flex-shrink: 0;
+      gap: 6px;
+      margin: 4px 0 36px;
     }
-
-    .compass-svg {
-      display: block;
-    }
-
-    /* ── SUBTITLE ───────────────────────────────────────────────── */
-    .subtitle-block {
-      margin-top: 48px;
+    .mid-rule-thick {
       width: 100%;
-      flex-shrink: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #C8923C 20%, #C8923C 80%, transparent);
+    }
+    .mid-rule-thin {
+      width: 60%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(200,146,60,0.4) 30%, rgba(200,146,60,0.4) 70%, transparent);
     }
 
-    .subtitle-label {
-      display: block;
-      font-family: 'DM Sans', sans-serif;
+    /* Subtitle */
+    .subtitle {
+      font-family: 'Inter', sans-serif;
       font-weight: 300;
-      font-size: 9px;
-      letter-spacing: 0.30em;
+      font-size: 13px;
+      color: #7A6E62;
+      letter-spacing: 0.13em;
       text-transform: uppercase;
-      color: #c9a84c;
-      margin-bottom: 11px;
+      line-height: 1.9;
     }
 
-    .subtitle-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 400;
-      font-style: italic;
-      font-size: 22px;
-      letter-spacing: 0.01em;
-      color: #0a1628;
-      line-height: 1.45;
-      max-width: 500px;
-    }
-
-    /* ── AUTHOR BLOCK ───────────────────────────────────────────── */
-    .author-block {
+    /* Author */
+    .author-area {
       margin-top: auto;
-      padding-bottom: 52px;
-      width: 100%;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      flex-shrink: 0;
     }
 
     .author-name {
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'EB Garamond', serif;
       font-weight: 500;
-      font-size: 17px;
-      letter-spacing: 0.09em;
+      font-size: 22px;
+      color: #C8923C;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: #0a1628;
     }
 
-    .author-rule {
-      display: block;
-      width: 42px;
-      height: 1.5px;
-      background: #c9a84c;
-      margin-bottom: 10px;
-    }
-
-    .series-badge {
-      text-align: right;
-    }
-
-    .series-badge-line1 {
-      display: block;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 8.5px;
-      letter-spacing: 0.30em;
-      text-transform: uppercase;
-      color: #6b7a91;
-      margin-bottom: 3px;
-    }
-
-    .series-badge-line2 {
-      display: block;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-      font-size: 8.5px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: #0a1628;
-    }
-
-    /* ── DOWNLOAD BUTTON ────────────────────────────────────────── */
-    #dl-btn {
-      margin-top: 36px;
-      padding: 14px 38px;
-      background: #0a1628;
-      color: #faf8f3;
-      font-family: 'DM Sans', sans-serif;
+    .author-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 9.5px;
       font-weight: 400;
-      font-size: 13px;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      border: none;
-      cursor: pointer;
-      transition: background 0.2s, color 0.2s, opacity 0.2s;
-      outline: none;
-      position: relative;
+      color: #5A5048;
+      margin-top: 6px;
     }
 
-    #dl-btn::before {
-      content: '';
-      position: absolute;
-      inset: -2px;
-      border: 1.5px solid #c9a84c;
-      pointer-events: none;
+    /* Bottom rule */
+    .bottom-rule {
+      width: 100%;
+      margin-top: 32px;
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+    .bottom-rule-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #C8923C, transparent);
     }
 
-    #dl-btn:hover {
-      background: #c9a84c;
-      color: #0a1628;
-    }
-
-    #dl-btn:disabled {
-      cursor: default;
+    .footer-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: #C8923C;
+      opacity: 0.5;
+      margin-top: 14px;
     }
   </style>
 </head>
 <body>
 
-<!-- ════════════════════════════════════════════════════════════════
-     COVER
-════════════════════════════════════════════════════════════════ -->
 <div id="cover">
+  <div class="glow"></div>
 
-  <!-- Spine rules -->
-  <div class="spine-top"></div>
-  <div class="spine-bottom"></div>
-
-  <!-- Inner layout -->
-  <div class="cover-inner">
-
-    <!-- Series top label -->
-    <span class="series-top">Filly Coder &nbsp;·&nbsp; AI Future Series</span>
-
-    <!-- Title -->
-    <div class="title-block">
-      <span class="title-article">The</span>
-      <span class="title-main">
-        <span class="word-opportunity">Opportunity</span>
-        <span class="word-mindset">Mindset</span>
-      </span>
+  <div class="inner">
+    <div class="top-rule">
+      <div class="top-rule-line"></div>
     </div>
 
-    <!-- Divider -->
-    <div class="divider-block">
-      <div class="divider-rule"></div>
-      <div class="divider-diamond"></div>
-      <div class="divider-rule"></div>
+    <div class="series">Filly Coder &ensp;·&ensp; AI Future Series</div>
+    <div class="series-rule"></div>
+
+    <div class="title-area">
+      <span class="the">The</span>
+      <span class="opportunity">Opportunity</span>
+      <span class="mindset">Mindset</span>
     </div>
 
-    <!-- Illustration: Compass -->
-    <div class="illustration-wrapper">
-      <svg class="compass-svg" width="130" height="130" viewBox="0 0 130 130" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Outer circle -->
-        <circle cx="65" cy="65" r="58" stroke="#0a1628" stroke-width="1.4"/>
-        <!-- Inner circle (thin) -->
-        <circle cx="65" cy="65" r="48" stroke="#0a1628" stroke-width="0.6" stroke-dasharray="3 4"/>
-        <!-- Cardinal tick marks -->
-        <line x1="65" y1="7" x2="65" y2="17" stroke="#0a1628" stroke-width="1.4"/>
-        <line x1="65" y1="113" x2="65" y2="123" stroke="#0a1628" stroke-width="1.4"/>
-        <line x1="7" y1="65" x2="17" y2="65" stroke="#0a1628" stroke-width="1.4"/>
-        <line x1="113" y1="65" x2="123" y2="65" stroke="#0a1628" stroke-width="1.4"/>
-        <!-- Minor tick marks -->
-        <line x1="65" y1="7" x2="65" y2="11" stroke="#0a1628" stroke-width="0.8" transform="rotate(45 65 65)"/>
-        <line x1="65" y1="7" x2="65" y2="11" stroke="#0a1628" stroke-width="0.8" transform="rotate(90 65 65)"/>
-        <line x1="65" y1="7" x2="65" y2="11" stroke="#0a1628" stroke-width="0.8" transform="rotate(135 65 65)"/>
-        <line x1="65" y1="7" x2="65" y2="11" stroke="#0a1628" stroke-width="0.8" transform="rotate(225 65 65)"/>
-        <line x1="65" y1="7" x2="65" y2="11" stroke="#0a1628" stroke-width="0.8" transform="rotate(270 65 65)"/>
-        <line x1="65" y1="7" x2="65" y2="11" stroke="#0a1628" stroke-width="0.8" transform="rotate(315 65 65)"/>
-        <!-- North needle (gold, pointing NE-ish, upward) -->
-        <polygon points="65,20 60.5,65 65,59 69.5,65" fill="#c9a84c"/>
-        <!-- South needle (dark navy) -->
-        <polygon points="65,110 60.5,65 65,71 69.5,65" fill="#0a1628" opacity="0.55"/>
-        <!-- Center hub -->
-        <circle cx="65" cy="65" r="4.5" fill="#faf8f3" stroke="#0a1628" stroke-width="1.2"/>
-        <circle cx="65" cy="65" r="1.8" fill="#c9a84c"/>
-        <!-- N cardinal label -->
-        <text x="65" y="33" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="9" font-weight="500" letter-spacing="0.1em" fill="#0a1628">N</text>
-      </svg>
+    <div class="mid-rule">
+      <div class="mid-rule-thick"></div>
+      <div class="mid-rule-thin"></div>
     </div>
 
-    <!-- Subtitle -->
-    <div class="subtitle-block">
-      <span class="subtitle-label">How to</span>
-      <span class="subtitle-text">Recognize, Create, and Capture Opportunity</span>
+    <div class="subtitle">
+      How to Recognize, Create,<br>and Capture Opportunity
     </div>
 
-    <!-- Author + Series badge -->
-    <div class="author-block">
-      <div>
-        <span class="author-rule"></span>
-        <span class="author-name">Bernard Baah</span>
-      </div>
-      <div class="series-badge">
-        <span class="series-badge-line1">Filly Coder</span>
-        <span class="series-badge-line2">AI Future Series</span>
-      </div>
+    <div class="author-area">
+      <div class="author-name">Bernard Baah</div>
+      <div class="author-title">Founder &amp; CEO, Filly Coder</div>
     </div>
 
-  </div><!-- /cover-inner -->
-</div><!-- /cover -->
+    <div class="bottom-rule">
+      <div class="bottom-rule-line"></div>
+    </div>
+    <div class="footer-text">Filly Coder Press</div>
+  </div>
+</div>
 
-<!-- ════════════════════════════════════════════════════════════════
-     DOWNLOAD BUTTONS
-════════════════════════════════════════════════════════════════ -->
+<!-- ── Download ────────────────────────────────────────── -->
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
-  .dl-group { display:flex; gap:10px; position:fixed; bottom:28px; left:50%; transform:translateX(-50%); z-index:9999; }
-  .dl-group button {
-    padding: 11px 22px; border: 2px solid #0e1f3d; border-radius: 3px; cursor: pointer;
-    font-family: 'Cormorant Garamond', serif; font-size: 14px; letter-spacing: .08em;
-    background: #0e1f3d; color: #f5f0e8; font-weight: 600;
-    box-shadow: 0 4px 16px rgba(0,0,0,.25); transition: opacity .2s;
+  .dl-group {
+    display: flex; gap: 10px;
+    position: fixed; bottom: 24px; left: 50%;
+    transform: translateX(-50%); z-index: 999;
   }
-  .dl-group button:disabled { opacity:.4; cursor:not-allowed; }
-  .dl-group button:not(:disabled):hover { opacity:.8; }
+  .dl-group button {
+    padding: 10px 22px; border: 1px solid rgba(200,146,60,0.5);
+    border-radius: 3px; cursor: pointer;
+    font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    background: rgba(13,11,9,0.85); color: #C8923C;
+    box-shadow: 0 4px 16px rgba(0,0,0,.6); transition: opacity .2s;
+    backdrop-filter: blur(8px);
+  }
+  .dl-group button:disabled { opacity: .3; cursor: not-allowed; }
+  .dl-group button:not(:disabled):hover { background: rgba(200,146,60,.12); }
 </style>
 <div class="dl-group">
   <button id="dl-jpg" onclick="downloadJPG()">⬇ Download JPG</button>
   <button id="dl-pdf" onclick="downloadPDF()">⬇ Download PDF</button>
 </div>
 <script>
-function renderCover() {
-  return html2canvas(document.getElementById('cover'), {
-    scale: 3, useCORS: true, width: 850, height: 1100, backgroundColor: '#f5f0e8'
+  function renderCover() {
+    return html2canvas(document.getElementById('cover'), {
+      scale: 3, useCORS: true, width: 850, height: 1100, backgroundColor: '#0D0B09'
+    });
+  }
+  function setBtns(d) { ['dl-jpg','dl-pdf'].forEach(id => document.getElementById(id).disabled = d); }
+  function downloadJPG() {
+    setBtns(true);
+    renderCover().then(c => {
+      const a = document.createElement('a');
+      a.download = 'opportunity-mindset-cover-b.jpg';
+      a.href = c.toDataURL('image/jpeg', 0.95);
+      a.click(); setBtns(false);
+    });
+  }
+  function downloadPDF() {
+    setBtns(true);
+    renderCover().then(c => {
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF({ orientation:'portrait', unit:'mm', format:[152.4,228.6] });
+      pdf.addImage(c.toDataURL('image/jpeg',0.95),'JPEG',0,0,152.4,228.6);
+      pdf.save('opportunity-mindset-cover-b.pdf'); setBtns(false);
+    });
+  }
+  window.addEventListener('DOMContentLoaded', () => {
+    const p = new URLSearchParams(location.search).get('download');
+    if (p === 'jpg') setTimeout(downloadJPG, 900);
+    if (p === 'pdf') setTimeout(downloadPDF, 900);
   });
-}
-function setBtns(disabled) {
-  ['dl-jpg','dl-pdf'].forEach(id => { const b=document.getElementById(id); b.disabled=disabled; });
-}
-function downloadJPG() {
-  setBtns(true);
-  renderCover().then(canvas => {
-    const link = document.createElement('a');
-    link.download = 'opportunity-mindset-cover-b.jpg';
-    link.href = canvas.toDataURL('image/jpeg', 0.95);
-    link.click();
-    setBtns(false);
-  });
-}
-function downloadPDF() {
-  setBtns(true);
-  renderCover().then(canvas => {
-    const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF({ orientation:'portrait', unit:'mm', format:[152.4, 228.6] });
-    pdf.addImage(canvas.toDataURL('image/jpeg',0.95), 'JPEG', 0, 0, 152.4, 228.6);
-    pdf.save('opportunity-mindset-cover-b.pdf');
-    setBtns(false);
-  });
-}
-window.addEventListener('DOMContentLoaded', () => {
-  const p = new URLSearchParams(location.search).get('download');
-  if (p === 'jpg') setTimeout(downloadJPG, 800);
-  if (p === 'pdf') setTimeout(downloadPDF, 800);
-});
 </script>
 
 </body>

@@ -3,618 +3,299 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Opportunity Mindset — Book Cover</title>
+  <title>Cover A — The Opportunity Mindset</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Cormorant+SC:wght@300;400;500;600&family=IM+Fell+English:ital@0;1&display=swap');
-
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      background: #030810;
+      background: #d6cec4;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
       padding: 40px 20px;
-      font-family: 'Cormorant Garamond', serif;
     }
 
-    /* ─── COVER ──────────────────────────────────────────────── */
+    /* ── Cover shell ─────────────────────────────────────── */
     #cover {
       position: relative;
       width: 850px;
       height: 1100px;
-      background: #08111f;
+      background: #F4EDE3;
       overflow: hidden;
-      flex-shrink: 0;
     }
 
-    /* Deep layered background */
+    /* Paper grain */
     #cover::before {
       content: '';
       position: absolute;
       inset: 0;
-      background:
-        radial-gradient(ellipse 70% 60% at 50% 42%, #0d1e38 0%, transparent 70%),
-        radial-gradient(ellipse 100% 80% at 50% 0%, #0c1830 0%, transparent 60%),
-        linear-gradient(180deg, #08111f 0%, #060e1a 55%, #040b15 100%);
-      z-index: 0;
-    }
-
-    /* Grain / noise texture overlay */
-    #cover::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
-      background-size: 300px 300px;
-      opacity: 0.55;
-      z-index: 1;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: 0.04;
       pointer-events: none;
+      z-index: 20;
     }
 
-    /* ─── BORDER FRAME ───────────────────────────────────────── */
-    .frame-outer {
+    /* Terracotta left spine stripe */
+    .spine-stripe {
       position: absolute;
-      inset: 22px;
-      border: 1px solid rgba(201, 168, 76, 0.25);
-      z-index: 2;
-      pointer-events: none;
-    }
-
-    .frame-inner {
-      position: absolute;
-      inset: 30px;
-      border: 1px solid rgba(201, 168, 76, 0.10);
-      z-index: 2;
-      pointer-events: none;
-    }
-
-    /* Corner ornaments */
-    .corner {
-      position: absolute;
-      width: 28px;
-      height: 28px;
-      z-index: 3;
-    }
-    .corner svg { width: 100%; height: 100%; }
-    .corner-tl { top: 14px; left: 14px; }
-    .corner-tr { top: 14px; right: 14px; transform: scaleX(-1); }
-    .corner-bl { bottom: 14px; left: 14px; transform: scaleY(-1); }
-    .corner-br { bottom: 14px; right: 14px; transform: scale(-1); }
-
-    /* ─── SERIES TAG — TOP ───────────────────────────────────── */
-    .series-top {
-      position: absolute;
-      top: 52px;
       left: 0;
-      right: 0;
-      text-align: center;
-      font-family: 'Cormorant SC', serif;
-      font-size: 10.5px;
-      font-weight: 400;
-      letter-spacing: 0.35em;
-      color: rgba(201, 168, 76, 0.45);
-      text-transform: uppercase;
-      z-index: 10;
+      top: 0;
+      width: 8px;
+      height: 100%;
+      background: #B54A1C;
     }
 
-    /* ─── CENTRAL MOTIF ──────────────────────────────────────── */
-    .motif-container {
-      position: absolute;
-      top: 98px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 340px;
-      height: 340px;
-      z-index: 5;
-    }
-
-    /* Radial glow behind the motif */
-    .motif-glow {
-      position: absolute;
-      inset: -40px;
-      background: radial-gradient(ellipse 55% 55% at 50% 50%,
-        rgba(201, 168, 76, 0.13) 0%,
-        rgba(201, 168, 76, 0.04) 45%,
-        transparent 70%);
-      z-index: 4;
-    }
-
-    .motif-svg {
+    /* ── Inner layout ────────────────────────────────────── */
+    .inner {
+      position: relative;
+      z-index: 2;
       width: 100%;
       height: 100%;
-      position: relative;
-      z-index: 5;
-    }
-
-    /* ─── TEXT BLOCK ─────────────────────────────────────────── */
-    .text-block {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 640px;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: flex-end;
-      padding-bottom: 68px;
-      z-index: 10;
-      /* subtle gradient so text sits on a darker base */
-      background: linear-gradient(to bottom,
-        transparent 0%,
-        rgba(4, 10, 20, 0.30) 30%,
-        rgba(4, 10, 20, 0.70) 70%,
-        rgba(4, 10, 20, 0.85) 100%);
+      padding: 56px 62px 52px 72px;
     }
 
-    .title {
-      font-family: 'Cormorant Garamond', serif;
+    /* Series badge */
+    .series {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
       font-weight: 600;
-      font-size: 62px;
-      line-height: 1.05;
-      letter-spacing: 0.015em;
-      color: #d4a84b;
-      text-align: center;
-      max-width: 680px;
-      text-shadow:
-        0 0 60px rgba(201, 168, 76, 0.35),
-        0 2px 8px rgba(0, 0, 0, 0.6);
-      margin-bottom: 0;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: #B54A1C;
     }
 
-    .title .article {
-      font-weight: 300;
+    /* ── Main title area ─────────────────────────────────── */
+    .title-area {
+      margin-top: auto;
+      padding-top: 0;
+    }
+
+    .article {
+      font-family: 'Playfair Display', serif;
       font-style: italic;
-      font-size: 48px;
-      color: rgba(212, 168, 75, 0.80);
-      display: block;
-      letter-spacing: 0.06em;
+      font-weight: 400;
+      font-size: 54px;
+      color: #7A6655;
+      line-height: 1;
       margin-bottom: 2px;
     }
 
-    /* Ornamental rule */
+    .title-main {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-style: normal;
+      font-size: 86px;
+      color: #1C2533;
+      line-height: 0.9;
+      letter-spacing: -0.025em;
+      display: block;
+    }
+
+    /* ── Rule ────────────────────────────────────────────── */
     .rule-wrap {
+      margin: 36px 0 30px;
       display: flex;
       align-items: center;
-      gap: 14px;
-      margin: 20px 0 18px;
-      width: 460px;
+      gap: 16px;
     }
 
-    .rule-line {
+    .rule {
       flex: 1;
-      height: 1px;
-      background: linear-gradient(to right, transparent, rgba(201, 168, 76, 0.55), transparent);
+      height: 2px;
+      background: #B54A1C;
     }
 
-    .rule-diamond {
-      width: 7px;
-      height: 7px;
-      background: rgba(201, 168, 76, 0.75);
-      transform: rotate(45deg);
+    .rule-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #B54A1C;
       flex-shrink: 0;
     }
 
+    /* ── Subtitle ────────────────────────────────────────── */
     .subtitle {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Inter', sans-serif;
       font-weight: 300;
-      font-style: italic;
-      font-size: 19.5px;
-      letter-spacing: 0.04em;
-      color: rgba(230, 210, 160, 0.78);
-      text-align: center;
-      max-width: 520px;
-      line-height: 1.55;
-      margin-bottom: 42px;
-    }
-
-    /* Thin separator before author */
-    .author-sep {
-      width: 60px;
-      height: 1px;
-      background: rgba(201, 168, 76, 0.30);
-      margin-bottom: 18px;
-    }
-
-    .author {
-      font-family: 'Cormorant SC', serif;
-      font-weight: 500;
-      font-size: 17px;
-      letter-spacing: 0.30em;
-      color: rgba(240, 225, 185, 0.88);
-      text-align: center;
+      font-size: 14.5px;
+      color: #7A6655;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      margin-bottom: 30px;
+      line-height: 1.75;
     }
 
-    /* ─── BOTTOM TAGLINE ─────────────────────────────────────── */
-    .series-bottom {
-      position: absolute;
-      bottom: 38px;
-      left: 0;
-      right: 0;
-      text-align: center;
-      font-family: 'Cormorant SC', serif;
+    /* ── Author ──────────────────────────────────────────── */
+    .author-area {
+      margin-top: 52px;
+    }
+
+    .author-label {
+      font-family: 'Inter', sans-serif;
       font-size: 9.5px;
-      font-weight: 400;
-      letter-spacing: 0.38em;
-      color: rgba(201, 168, 76, 0.38);
-      text-transform: uppercase;
-      z-index: 10;
-    }
-
-    /* ─── DOWNLOAD BUTTON ────────────────────────────────────── */
-    #dl-btn {
-      margin-top: 36px;
-      padding: 14px 36px;
-      background: transparent;
-      border: 1px solid rgba(201, 168, 76, 0.50);
-      color: rgba(201, 168, 76, 0.85);
-      font-family: 'Cormorant SC', serif;
-      font-size: 13px;
       font-weight: 500;
-      letter-spacing: 0.28em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      outline: none;
-      position: relative;
+      color: #B54A1C;
+      opacity: 0.7;
+      margin-bottom: 7px;
     }
 
-    #dl-btn::before {
-      content: '';
+    .author-name {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 26px;
+      color: #1C2533;
+      letter-spacing: 0.01em;
+    }
+
+    /* ── Footer ──────────────────────────────────────────── */
+    .footer {
+      margin-top: auto;
+      padding-top: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-top: 1px solid rgba(181,74,28,0.18);
+    }
+
+    .publisher-name {
+      font-family: 'Inter', sans-serif;
+      font-size: 9.5px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #B54A1C;
+      opacity: 0.6;
+    }
+
+    .cover-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #B09080;
+    }
+
+    /* ── Decorative bracket ──────────────────────────────── */
+    .bracket-top {
       position: absolute;
-      inset: -4px;
-      border: 1px solid rgba(201, 168, 76, 0.15);
-      pointer-events: none;
+      top: 44px;
+      right: 52px;
+      width: 48px;
+      height: 48px;
+      border-top: 2px solid #B54A1C;
+      border-right: 2px solid #B54A1C;
+      opacity: 0.35;
     }
-
-    #dl-btn:hover {
-      background: rgba(201, 168, 76, 0.10);
-      border-color: rgba(201, 168, 76, 0.75);
-      color: rgba(201, 168, 76, 1);
-      box-shadow: 0 0 24px rgba(201, 168, 76, 0.15);
-    }
-
-    #dl-btn:disabled {
-      cursor: wait;
+    .bracket-bottom {
+      position: absolute;
+      bottom: 44px;
+      right: 52px;
+      width: 48px;
+      height: 48px;
+      border-bottom: 2px solid #B54A1C;
+      border-right: 2px solid #B54A1C;
+      opacity: 0.35;
     }
   </style>
 </head>
 <body>
 
-  <!-- ═══════════════════════════════════════════════════ COVER ══ -->
-  <div id="cover">
+<div id="cover">
+  <div class="spine-stripe"></div>
+  <div class="bracket-top"></div>
+  <div class="bracket-bottom"></div>
 
-    <!-- Layered bg handled by ::before / ::after pseudo-elements -->
+  <div class="inner">
+    <div class="series">Filly Coder &ensp;·&ensp; AI Future Series</div>
 
-    <!-- Frame -->
-    <div class="frame-outer"></div>
-    <div class="frame-inner"></div>
-
-    <!-- Corner ornaments -->
-    <div class="corner corner-tl">
-      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M2 26 L2 2 L26 2" stroke="rgba(201,168,76,0.55)" stroke-width="1"/>
-        <path d="M2 14 L8 14" stroke="rgba(201,168,76,0.40)" stroke-width="0.8"/>
-        <path d="M14 2 L14 8" stroke="rgba(201,168,76,0.40)" stroke-width="0.8"/>
-        <circle cx="2" cy="2" r="1.5" fill="rgba(201,168,76,0.60)"/>
-      </svg>
-    </div>
-    <div class="corner corner-tr">
-      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M2 26 L2 2 L26 2" stroke="rgba(201,168,76,0.55)" stroke-width="1"/>
-        <path d="M2 14 L8 14" stroke="rgba(201,168,76,0.40)" stroke-width="0.8"/>
-        <path d="M14 2 L14 8" stroke="rgba(201,168,76,0.40)" stroke-width="0.8"/>
-        <circle cx="2" cy="2" r="1.5" fill="rgba(201,168,76,0.60)"/>
-      </svg>
-    </div>
-    <div class="corner corner-bl">
-      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M2 26 L2 2 L26 2" stroke="rgba(201,168,76,0.55)" stroke-width="1"/>
-        <path d="M2 14 L8 14" stroke="rgba(201,168,76,0.40)" stroke-width="0.8"/>
-        <path d="M14 2 L14 8" stroke="rgba(201,168,76,0.40)" stroke-width="0.8"/>
-        <circle cx="2" cy="2" r="1.5" fill="rgba(201,168,76,0.60)"/>
-      </svg>
-    </div>
-    <div class="corner corner-br">
-      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M2 26 L2 2 L26 2" stroke="rgba(201,168,76,0.55)" stroke-width="1"/>
-        <path d="M2 14 L8 14" stroke="rgba(201,168,76,0.40)" stroke-width="0.8"/>
-        <path d="M14 2 L14 8" stroke="rgba(201,168,76,0.40)" stroke-width="0.8"/>
-        <circle cx="2" cy="2" r="1.5" fill="rgba(201,168,76,0.60)"/>
-      </svg>
+    <div class="title-area">
+      <div class="article">The</div>
+      <span class="title-main">Oppor&shy;tunity</span>
+      <span class="title-main">Mindset</span>
     </div>
 
-    <!-- Series tag — top -->
-    <div class="series-top">Filly Coder &nbsp;·&nbsp; AI Future Series</div>
-
-    <!-- ─── CENTRAL MOTIF: Compass Rose / Sigil ─── -->
-    <div class="motif-container">
-      <div class="motif-glow"></div>
-      <svg class="motif-svg" viewBox="0 0 340 340" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <!-- Gold gradient for main elements -->
-          <radialGradient id="goldGrad" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#f0d080"/>
-            <stop offset="50%" stop-color="#c9a84c"/>
-            <stop offset="100%" stop-color="#8a6820"/>
-          </radialGradient>
-          <!-- Dimmer gold for secondary rings -->
-          <radialGradient id="goldFaint" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#c9a84c" stop-opacity="0.5"/>
-            <stop offset="100%" stop-color="#8a6820" stop-opacity="0.1"/>
-          </radialGradient>
-          <!-- Inner glow -->
-          <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#ffe8a0" stop-opacity="0.9"/>
-            <stop offset="40%" stop-color="#d4a84b" stop-opacity="0.6"/>
-            <stop offset="100%" stop-color="#8a6820" stop-opacity="0"/>
-          </radialGradient>
-          <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur stdDeviation="3.5" result="blur"/>
-            <feMerge>
-              <feMergeNode in="blur"/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-          </filter>
-          <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="6" result="blur"/>
-            <feMerge>
-              <feMergeNode in="blur"/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-          </filter>
-          <filter id="coreFilter" x="-60%" y="-60%" width="220%" height="220%">
-            <feGaussianBlur stdDeviation="8" result="blur"/>
-            <feMerge>
-              <feMergeNode in="blur"/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-          </filter>
-        </defs>
-
-        <!-- Outermost faint ring -->
-        <circle cx="170" cy="170" r="158" stroke="rgba(201,168,76,0.08)" stroke-width="0.5"/>
-        <circle cx="170" cy="170" r="150" stroke="rgba(201,168,76,0.12)" stroke-width="0.5"/>
-
-        <!-- Tick marks on outer ring — 72 ticks every 5° -->
-        <g stroke="rgba(201,168,76,0.22)" stroke-width="0.7">
-          <!-- Major ticks every 45° (8 ticks) — longer -->
-          <line x1="170" y1="22" x2="170" y2="35" transform="rotate(0 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="35" transform="rotate(45 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="35" transform="rotate(90 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="35" transform="rotate(135 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="35" transform="rotate(180 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="35" transform="rotate(225 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="35" transform="rotate(270 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="35" transform="rotate(315 170 170)"/>
-        </g>
-        <!-- Minor ticks every 10° -->
-        <g stroke="rgba(201,168,76,0.14)" stroke-width="0.5">
-          <line x1="170" y1="22" x2="170" y2="30" transform="rotate(10 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="30" transform="rotate(20 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="30" transform="rotate(30 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="30" transform="rotate(40 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="30" transform="rotate(50 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="30" transform="rotate(60 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="30" transform="rotate(70 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="30" transform="rotate(80 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="30" transform="rotate(100 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="30" transform="rotate(110 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="30" transform="rotate(120 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="30" transform="rotate(130 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="30" transform="rotate(140 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="30" transform="rotate(150 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="30" transform="rotate(160 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="30" transform="rotate(170 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="30" transform="rotate(190 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="30" transform="rotate(200 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="30" transform="rotate(210 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="30" transform="rotate(220 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="30" transform="rotate(230 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="30" transform="rotate(240 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="30" transform="rotate(250 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="30" transform="rotate(260 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="30" transform="rotate(280 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="30" transform="rotate(290 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="30" transform="rotate(300 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="30" transform="rotate(310 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="30" transform="rotate(320 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="30" transform="rotate(330 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="30" transform="rotate(340 170 170)"/>
-          <line x1="170" y1="22" x2="170" y2="30" transform="rotate(350 170 170)"/>
-        </g>
-
-        <!-- Mid rings -->
-        <circle cx="170" cy="170" r="130" stroke="rgba(201,168,76,0.18)" stroke-width="0.8"/>
-        <circle cx="170" cy="170" r="110" stroke="rgba(201,168,76,0.14)" stroke-width="0.5"/>
-
-        <!-- ── 16-point compass rose ── -->
-        <!-- 4 main cardinal points — tall, elegant diamond spires -->
-        <!-- North spire -->
-        <path d="M170 50 L163 170 L170 155 L177 170 Z" fill="url(#goldGrad)" opacity="0.92" filter="url(#glow)"/>
-        <!-- South spire -->
-        <path d="M170 290 L163 170 L170 185 L177 170 Z" fill="url(#goldGrad)" opacity="0.75"/>
-        <!-- East spire -->
-        <path d="M290 170 L170 163 L185 170 L170 177 Z" fill="url(#goldGrad)" opacity="0.75"/>
-        <!-- West spire -->
-        <path d="M50 170 L170 163 L155 170 L170 177 Z" fill="url(#goldGrad)" opacity="0.75"/>
-
-        <!-- 4 intercardinal points — shorter diamond spires at 45° -->
-        <path d="M232 108 L165 165 L170 172 L175 165 Z" fill="url(#goldGrad)" opacity="0.55" transform="rotate(0 170 170)"/>
-        <path d="M232 108 L165 165 L170 172 L175 165 Z" fill="url(#goldGrad)" opacity="0.55" transform="rotate(90 170 170)"/>
-        <path d="M232 108 L165 165 L170 172 L175 165 Z" fill="url(#goldGrad)" opacity="0.55" transform="rotate(180 170 170)"/>
-        <path d="M232 108 L165 165 L170 172 L175 165 Z" fill="url(#goldGrad)" opacity="0.55" transform="rotate(270 170 170)"/>
-
-        <!-- 8 minor points at 22.5° — slim, elegant lines with arrowheads -->
-        <g fill="rgba(201,168,76,0.35)" filter="url(#glow)">
-          <!-- 22.5° points as slim elongated diamonds, each rotated -->
-          <path d="M170 95 L167.5 170 L170 162 L172.5 170 Z" transform="rotate(22.5 170 170)"/>
-          <path d="M170 95 L167.5 170 L170 162 L172.5 170 Z" transform="rotate(67.5 170 170)"/>
-          <path d="M170 95 L167.5 170 L170 162 L172.5 170 Z" transform="rotate(112.5 170 170)"/>
-          <path d="M170 95 L167.5 170 L170 162 L172.5 170 Z" transform="rotate(157.5 170 170)"/>
-          <path d="M170 95 L167.5 170 L170 162 L172.5 170 Z" transform="rotate(202.5 170 170)"/>
-          <path d="M170 95 L167.5 170 L170 162 L172.5 170 Z" transform="rotate(247.5 170 170)"/>
-          <path d="M170 95 L167.5 170 L170 162 L172.5 170 Z" transform="rotate(292.5 170 170)"/>
-          <path d="M170 95 L167.5 170 L170 162 L172.5 170 Z" transform="rotate(337.5 170 170)"/>
-        </g>
-
-        <!-- Inner structural ring -->
-        <circle cx="170" cy="170" r="75" stroke="rgba(201,168,76,0.30)" stroke-width="1"/>
-        <circle cx="170" cy="170" r="60" stroke="rgba(201,168,76,0.20)" stroke-width="0.7"/>
-
-        <!-- Decorative inner ring ticks — 36 ticks every 10° -->
-        <g stroke="rgba(201,168,76,0.28)" stroke-width="0.8">
-          <line x1="170" y1="96" x2="170" y2="102" transform="rotate(0 170 170)"/>
-          <line x1="170" y1="96" x2="170" y2="102" transform="rotate(10 170 170)"/>
-          <line x1="170" y1="96" x2="170" y2="102" transform="rotate(20 170 170)"/>
-          <line x1="170" y1="96" x2="170" y2="102" transform="rotate(30 170 170)"/>
-          <line x1="170" y1="96" x2="170" y2="102" transform="rotate(40 170 170)"/>
-          <line x1="170" y1="96" x2="170" y2="102" transform="rotate(50 170 170)"/>
-          <line x1="170" y1="96" x2="170" y2="102" transform="rotate(60 170 170)"/>
-          <line x1="170" y1="96" x2="170" y2="102" transform="rotate(70 170 170)"/>
-          <line x1="170" y1="96" x2="170" y2="102" transform="rotate(80 170 170)"/>
-          <line x1="170" y1="96" x2="170" y2="102" transform="rotate(90 170 170)"/>
-          <line x1="170" y1="96" x2="170" y2="102" transform="rotate(100 170 170)"/>
-          <line x1="170" y1="96" x2="170" y2="102" transform="rotate(110 170 170)"/>
-          <line x1="170" y1="96" x2="170" y2="102" transform="rotate(120 170 170)"/>
-          <line x1="170" y1="96" x2="170" y2="102" transform="rotate(130 170 170)"/>
-          <line x1="170" y1="96" x2="170" y2="102" transform="rotate(140 170 170)"/>
-          <line x1="170" y1="96" x2="170" y2="102" transform="rotate(150 170 170)"/>
-          <line x1="170" y1="96" x2="170" y2="102" transform="rotate(160 170 170)"/>
-          <line x1="170" y1="96" x2="170" y2="102" transform="rotate(170 170 170)"/>
-          <line x1="170" y1="96" x2="170" y2="102" transform="rotate(180 170 170)"/>
-          <line x1="170" y1="96" x2="170" y2="102" transform="rotate(190 170 170)"/>
-          <line x1="170" y1="96" x2="170" y2="102" transform="rotate(200 170 170)"/>
-          <line x1="170" y1="96" x2="170" y2="102" transform="rotate(210 170 170)"/>
-          <line x1="170" y1="96" x2="170" y2="102" transform="rotate(220 170 170)"/>
-          <line x1="170" y1="96" x2="170" y2="102" transform="rotate(230 170 170)"/>
-          <line x1="170" y1="96" x2="170" y2="102" transform="rotate(240 170 170)"/>
-          <line x1="170" y1="96" x2="170" y2="102" transform="rotate(250 170 170)"/>
-          <line x1="170" y1="96" x2="170" y2="102" transform="rotate(260 170 170)"/>
-          <line x1="170" y1="96" x2="170" y2="102" transform="rotate(270 170 170)"/>
-          <line x1="170" y1="96" x2="170" y2="102" transform="rotate(280 170 170)"/>
-          <line x1="170" y1="96" x2="170" y2="102" transform="rotate(290 170 170)"/>
-          <line x1="170" y1="96" x2="170" y2="102" transform="rotate(300 170 170)"/>
-          <line x1="170" y1="96" x2="170" y2="102" transform="rotate(310 170 170)"/>
-          <line x1="170" y1="96" x2="170" y2="102" transform="rotate(320 170 170)"/>
-          <line x1="170" y1="96" x2="170" y2="102" transform="rotate(330 170 170)"/>
-          <line x1="170" y1="96" x2="170" y2="102" transform="rotate(340 170 170)"/>
-          <line x1="170" y1="96" x2="170" y2="102" transform="rotate(350 170 170)"/>
-        </g>
-
-        <!-- Inner decorative star polygon — octagram -->
-        <polygon
-          points="170,125 174,162 204,148 175,170 204,192 174,178 170,215 166,178 136,192 165,170 136,148 166,162"
-          fill="none"
-          stroke="rgba(201,168,76,0.28)"
-          stroke-width="0.7"
-        />
-
-        <!-- Central glow disc -->
-        <circle cx="170" cy="170" r="28" fill="url(#coreGlow)" filter="url(#coreFilter)" opacity="0.7"/>
-
-        <!-- Center ring + dot -->
-        <circle cx="170" cy="170" r="18" fill="none" stroke="url(#goldGrad)" stroke-width="1.2"/>
-        <circle cx="170" cy="170" r="10" fill="none" stroke="rgba(201,168,76,0.55)" stroke-width="0.8"/>
-        <circle cx="170" cy="170" r="4"  fill="url(#goldGrad)" filter="url(#glow)"/>
-        <circle cx="170" cy="170" r="1.5" fill="#ffe090"/>
-
-        <!-- N marker -->
-        <text x="170" y="48" text-anchor="middle" font-family="'Cormorant SC', serif" font-size="11" fill="rgba(201,168,76,0.70)" letter-spacing="1">N</text>
-      </svg>
-    </div>
-    <!-- /motif -->
-
-    <!-- ─── TEXT BLOCK ─── -->
-    <div class="text-block">
-      <h1 class="title">
-        <span class="article">The</span>
-        Opportunity<br/>Mindset
-      </h1>
-
-      <div class="rule-wrap">
-        <div class="rule-line"></div>
-        <div class="rule-diamond"></div>
-        <div class="rule-line"></div>
-      </div>
-
-      <p class="subtitle">How to Recognize, Create,<br/>and Capture Opportunity</p>
-
-      <div class="author-sep"></div>
-      <div class="author">Bernard Baah</div>
+    <div class="rule-wrap">
+      <div class="rule-dot"></div>
+      <div class="rule"></div>
     </div>
 
-    <!-- Series bottom -->
-    <div class="series-bottom">Filly Coder &nbsp;·&nbsp; AI Future Series</div>
+    <div class="subtitle">
+      How to Recognize, Create,<br>
+      and Capture Opportunity
+    </div>
 
+    <div class="author-area">
+      <div class="author-label">Author</div>
+      <div class="author-name">Bernard Baah</div>
+    </div>
+
+    <div class="footer">
+      <div class="publisher-name">Filly Coder</div>
+      <div class="cover-label">Cover A</div>
+    </div>
   </div>
-  <!-- /cover -->
+</div>
 
-  <!-- ─── DOWNLOAD BUTTONS ────────────────────────────────────── -->
-  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <style>
-    .dl-group { display:flex; gap:10px; position:fixed; bottom:28px; left:50%; transform:translateX(-50%); z-index:9999; }
-    .dl-group button {
-      padding: 11px 22px; border: none; border-radius: 4px; cursor: pointer;
-      font-family: 'Libre Baskerville', serif; font-size: 13px; letter-spacing: .06em;
-      background: linear-gradient(135deg,#c9a84c,#e8cc7a); color:#0a1628;
-      font-weight:700; box-shadow:0 4px 16px rgba(0,0,0,.45);
-      transition: opacity .2s;
-    }
-    .dl-group button:disabled { opacity:.4; cursor:not-allowed; }
-    .dl-group button:not(:disabled):hover { opacity:.85; }
-  </style>
-  <div class="dl-group">
-    <button id="dl-jpg" onclick="downloadJPG()">⬇ Download JPG</button>
-    <button id="dl-pdf" onclick="downloadPDF()">⬇ Download PDF</button>
-  </div>
-  <script>
-    function renderCover() {
-      return html2canvas(document.getElementById('cover'), {
-        scale: 3, useCORS: true, width: 850, height: 1100, backgroundColor: '#0a1628'
-      });
-    }
-    function setBtns(disabled) {
-      ['dl-jpg','dl-pdf'].forEach(id => { const b=document.getElementById(id); b.disabled=disabled; });
-    }
-    function downloadJPG() {
-      setBtns(true);
-      renderCover().then(canvas => {
-        const link = document.createElement('a');
-        link.download = 'opportunity-mindset-cover-a.jpg';
-        link.href = canvas.toDataURL('image/jpeg', 0.95);
-        link.click();
-        setBtns(false);
-      });
-    }
-    function downloadPDF() {
-      setBtns(true);
-      renderCover().then(canvas => {
-        const { jsPDF } = window.jspdf;
-        // KDP trim: 6"×9" in mm
-        const pdf = new jsPDF({ orientation:'portrait', unit:'mm', format:[152.4, 228.6] });
-        pdf.addImage(canvas.toDataURL('image/jpeg',0.95), 'JPEG', 0, 0, 152.4, 228.6);
-        pdf.save('opportunity-mindset-cover-a.pdf');
-        setBtns(false);
-      });
-    }
-    // Auto-download via query param (used by hub page links)
-    window.addEventListener('DOMContentLoaded', () => {
-      const p = new URLSearchParams(location.search).get('download');
-      if (p === 'jpg') setTimeout(downloadJPG, 800);
-      if (p === 'pdf') setTimeout(downloadPDF, 800);
+<!-- ── Download ────────────────────────────────────────── -->
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+  .dl-group {
+    display: flex; gap: 10px;
+    position: fixed; bottom: 24px; left: 50%;
+    transform: translateX(-50%); z-index: 999;
+  }
+  .dl-group button {
+    padding: 10px 22px; border: none; border-radius: 3px; cursor: pointer;
+    font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    background: #B54A1C; color: #F4EDE3;
+    box-shadow: 0 4px 16px rgba(0,0,0,.3); transition: opacity .2s;
+  }
+  .dl-group button:disabled { opacity: .35; cursor: not-allowed; }
+  .dl-group button:not(:disabled):hover { opacity: .8; }
+</style>
+<div class="dl-group">
+  <button id="dl-jpg" onclick="downloadJPG()">⬇ Download JPG</button>
+  <button id="dl-pdf" onclick="downloadPDF()">⬇ Download PDF</button>
+</div>
+<script>
+  function renderCover() {
+    return html2canvas(document.getElementById('cover'), {
+      scale: 3, useCORS: true, width: 850, height: 1100, backgroundColor: '#F4EDE3'
     });
-  </script>
+  }
+  function setBtns(d) { ['dl-jpg','dl-pdf'].forEach(id => document.getElementById(id).disabled = d); }
+  function downloadJPG() {
+    setBtns(true);
+    renderCover().then(c => {
+      const a = document.createElement('a');
+      a.download = 'opportunity-mindset-cover-a.jpg';
+      a.href = c.toDataURL('image/jpeg', 0.95);
+      a.click(); setBtns(false);
+    });
+  }
+  function downloadPDF() {
+    setBtns(true);
+    renderCover().then(c => {
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF({ orientation:'portrait', unit:'mm', format:[152.4,228.6] });
+      pdf.addImage(c.toDataURL('image/jpeg',0.95),'JPEG',0,0,152.4,228.6);
+      pdf.save('opportunity-mindset-cover-a.pdf'); setBtns(false);
+    });
+  }
+  window.addEventListener('DOMContentLoaded', () => {
+    const p = new URLSearchParams(location.search).get('download');
+    if (p === 'jpg') setTimeout(downloadJPG, 900);
+    if (p === 'pdf') setTimeout(downloadPDF, 900);
+  });
+</script>
 
 </body>
 </html>
