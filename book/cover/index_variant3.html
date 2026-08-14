@@ -1,431 +1,497 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Opportunity Mindset – Cover C</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap');
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Opportunity Mindset — Cover Variant 3</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;600;700&display=swap');
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    body {
-      background: #e8e4dc;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      min-height: 100vh;
-      padding: 20px;
-      font-family: 'Source Sans 3', sans-serif;
-    }
+  body {
+    background: #0d0d0d;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 40px 20px 60px;
+    min-height: 100vh;
+    font-family: 'Space Grotesk', sans-serif;
+  }
 
-    #dl-btn {
-      margin-bottom: 16px;
-      padding: 12px 28px;
-      background: #1a2744;
-      color: #f5f0e8;
-      border: none;
-      border-radius: 2px;
-      font-family: 'Source Sans 3', sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      cursor: pointer;
-      text-transform: uppercase;
-      transition: background 0.2s;
-    }
-    #dl-btn:hover { background: #253660; }
+  /* ─── COVER ─────────────────────────────────────────────── */
+  #cover {
+    position: relative;
+    width: 850px;
+    height: 1100px;
+    overflow: hidden;
+    background: linear-gradient(170deg, #1a0a3d 0%, #12103a 28%, #0b2235 55%, #072a1e 80%, #041a10 100%);
+    flex-shrink: 0;
+  }
 
-    #cover {
-      width: 850px;
-      height: 1100px;
-      background: #f7f4ee;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+  /* ── Subtle noise texture overlay */
+  #cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    background-size: 300px 300px;
+    pointer-events: none;
+    z-index: 1;
+  }
 
-    /* Top navy header band */
-    .header-band {
-      width: 100%;
-      background: #1a2744;
-      padding: 28px 70px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-shrink: 0;
-      z-index: 2;
-    }
+  /* ── Deep radial glow from below center */
+  .glow-radial {
+    position: absolute;
+    bottom: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 900px;
+    height: 700px;
+    background: radial-gradient(ellipse at center bottom, rgba(201,168,76,0.18) 0%, rgba(201,168,76,0.07) 35%, transparent 70%);
+    z-index: 2;
+    pointer-events: none;
+  }
 
-    .header-series {
-      font-family: 'Source Sans 3', sans-serif;
-      font-size: 9px;
-      font-weight: 600;
-      letter-spacing: 0.28em;
-      color: rgba(201,168,76,0.8);
-      text-transform: uppercase;
-    }
+  /* ── Top atmospheric glow */
+  .glow-top {
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 300px;
+    background: radial-gradient(ellipse at center, rgba(100,80,200,0.25) 0%, transparent 70%);
+    z-index: 2;
+    pointer-events: none;
+  }
 
-    .header-rule {
-      flex: 1;
-      height: 1px;
-      background: rgba(201,168,76,0.3);
-      margin: 0 20px;
-    }
+  /* ─── MAIN SVG VISUAL ─── */
+  .visual-container {
+    position: absolute;
+    bottom: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 700px;
+    height: 620px;
+    z-index: 5;
+  }
 
-    .header-logo {
-      font-family: 'Source Sans 3', sans-serif;
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      color: rgba(201,168,76,0.7);
-      text-transform: uppercase;
-    }
+  /* ─── GRID LINES (perspective grid fading up) ─── */
+  .grid-layer {
+    position: absolute;
+    bottom: 150px;
+    left: 0;
+    width: 100%;
+    height: 480px;
+    z-index: 3;
+    pointer-events: none;
+  }
 
-    /* Main content area */
-    .main-content {
-      flex: 1;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 50px 70px 0;
-      position: relative;
-      z-index: 1;
-    }
+  /* ─── HORIZONTAL RULE ─── */
+  .horizon-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 358px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(201,168,76,0.6) 20%, rgba(232,201,106,0.9) 50%, rgba(201,168,76,0.6) 80%, transparent 100%);
+    z-index: 6;
+  }
 
-    /* Title block */
-    .title-block {
-      width: 100%;
-      text-align: center;
-      margin-bottom: 38px;
-    }
+  /* ─── TEXT ELEMENTS ─── */
+  .cover-text {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 10;
+  }
 
-    .eyebrow {
-      font-family: 'Source Sans 3', sans-serif;
-      font-size: 9.5px;
-      font-weight: 700;
-      letter-spacing: 0.35em;
-      color: #c9a84c;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
+  /* Series tagline — very top */
+  .series-tag {
+    top: 38px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    color: #c9a84c;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
 
-    .main-title {
-      font-family: 'Lora', serif;
-      font-size: 68px;
-      font-weight: 700;
-      color: #1a2744;
-      line-height: 1.05;
-      letter-spacing: -0.01em;
-      margin-bottom: 8px;
-    }
+  /* Thin gold rule under series tag */
+  .top-rule {
+    position: absolute;
+    top: 66px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #c9a84c, transparent);
+    z-index: 10;
+    opacity: 0.5;
+  }
 
-    .title-ornament {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      margin: 20px auto;
-    }
-    .title-ornament .ornament-line {
-      width: 70px;
-      height: 1px;
-      background: #c9a84c;
-    }
-    .title-ornament .diamond {
-      width: 8px;
-      height: 8px;
-      background: #c9a84c;
-      transform: rotate(45deg);
-    }
+  /* Main Title */
+  .title {
+    top: 88px;
+    text-align: center;
+    padding: 0 40px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 102px;
+    line-height: 0.92;
+    letter-spacing: 0.04em;
+    color: #ffffff;
+    text-shadow:
+      0 0 80px rgba(201,168,76,0.3),
+      0 4px 30px rgba(0,0,0,0.6),
+      0 2px 0px rgba(201,168,76,0.15);
+  }
 
-    .subtitle {
-      font-family: 'Lora', serif;
-      font-style: italic;
-      font-size: 18px;
-      font-weight: 400;
-      color: #4a5568;
-      line-height: 1.55;
-      letter-spacing: 0.015em;
-    }
+  .title span.highlight {
+    display: block;
+    color: #e8c96a;
+    text-shadow:
+      0 0 60px rgba(232,201,106,0.5),
+      0 0 120px rgba(201,168,76,0.25),
+      0 4px 20px rgba(0,0,0,0.5);
+  }
 
-    /* Key/Door graphic */
-    .graphic-wrap {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 10px 0 18px;
-      flex-shrink: 0;
-    }
-    .graphic-wrap svg {
-      width: 320px;
-      height: 320px;
-    }
+  /* Subtitle */
+  .subtitle {
+    top: 318px;
+    text-align: center;
+    padding: 0 80px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    color: #c9a84c;
+    text-transform: uppercase;
+    line-height: 1.7;
+    opacity: 0.9;
+  }
 
-    /* Pull quote */
-    .pull-quote {
-      width: 100%;
-      border-left: 3px solid #c9a84c;
-      padding: 10px 0 10px 22px;
-      margin-bottom: 0;
-    }
-    .pull-quote p {
-      font-family: 'Lora', serif;
-      font-style: italic;
-      font-size: 13.5px;
-      color: #5a6478;
-      line-height: 1.6;
-      max-width: 520px;
-    }
+  /* Author */
+  .author {
+    bottom: 80px;
+    text-align: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    color: #ffffff;
+    text-transform: uppercase;
+    opacity: 0.92;
+  }
 
-    /* Bottom footer band */
-    .footer-band {
-      width: 100%;
-      background: #1a2744;
-      padding: 22px 70px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-shrink: 0;
-      margin-top: auto;
-      z-index: 2;
-    }
+  /* Bottom rule + series */
+  .bottom-rule {
+    position: absolute;
+    bottom: 115px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 420px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.5), rgba(201,168,76,0.9), rgba(201,168,76,0.5), transparent);
+    z-index: 10;
+  }
 
-    .author-block {}
+  .series-bottom {
+    bottom: 36px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    color: #c9a84c;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
 
-    .author-label {
-      font-family: 'Source Sans 3', sans-serif;
-      font-size: 8px;
-      font-weight: 600;
-      letter-spacing: 0.3em;
-      color: rgba(201,168,76,0.6);
-      text-transform: uppercase;
-      margin-bottom: 5px;
-    }
+  /* ─── DOWNLOAD BUTTON ─── */
+  #dl-btn {
+    margin-top: 36px;
+    padding: 14px 44px;
+    background: transparent;
+    border: 1.5px solid #c9a84c;
+    color: #c9a84c;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+  }
 
-    .author-name {
-      font-family: 'Lora', serif;
-      font-size: 22px;
-      font-weight: 600;
-      color: #ffffff;
-      letter-spacing: 0.04em;
-    }
+  #dl-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(201,168,76,0.12), rgba(201,168,76,0.04));
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
 
-    .footer-right {
-      text-align: right;
-    }
-    .footer-series {
-      font-family: 'Source Sans 3', sans-serif;
-      font-size: 8px;
-      font-weight: 600;
-      letter-spacing: 0.25em;
-      color: rgba(201,168,76,0.6);
-      text-transform: uppercase;
-      line-height: 1.9;
-    }
-
-    /* Subtle paper texture lines */
-    .texture-overlay {
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 59px,
-        rgba(180,170,150,0.06) 60px
-      );
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* Gold accent corner ornament */
-    .corner-accent {
-      position: absolute;
-      bottom: 86px;
-      right: 40px;
-      z-index: 3;
-      opacity: 0.18;
-    }
-  </style>
+  #dl-btn:hover::before { opacity: 1; }
+  #dl-btn:hover {
+    color: #e8c96a;
+    border-color: #e8c96a;
+    box-shadow: 0 0 30px rgba(201,168,76,0.2), inset 0 0 20px rgba(201,168,76,0.05);
+  }
+  #dl-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+</style>
 </head>
 <body>
 
-  <button id="dl-btn" onclick="downloadCover()">⬇ Download Cover (KDP Ready)</button>
+<div id="cover">
 
-  <div id="cover">
-    <div class="texture-overlay"></div>
+  <!-- Atmospheric glows -->
+  <div class="glow-top"></div>
+  <div class="glow-radial"></div>
 
-    <!-- Corner accent -->
-    <svg class="corner-accent" width="90" height="90" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
-      <rect x="0" y="0" width="90" height="90" fill="none" stroke="#c9a84c" stroke-width="1"/>
-      <rect x="8" y="8" width="74" height="74" fill="none" stroke="#c9a84c" stroke-width="0.5"/>
-      <line x1="0" y1="0" x2="90" y2="90" stroke="#c9a84c" stroke-width="0.4"/>
-      <line x1="90" y1="0" x2="0" y2="90" stroke="#c9a84c" stroke-width="0.4"/>
-    </svg>
+  <!-- Perspective grid SVG -->
+  <svg class="grid-layer" viewBox="0 0 850 480" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <defs>
+      <linearGradient id="gridFadeV" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#c9a84c" stop-opacity="0"/>
+        <stop offset="45%" stop-color="#c9a84c" stop-opacity="0.22"/>
+        <stop offset="100%" stop-color="#c9a84c" stop-opacity="0.07"/>
+      </linearGradient>
+      <linearGradient id="gridFadeH" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#c9a84c" stop-opacity="0"/>
+        <stop offset="30%" stop-color="#c9a84c" stop-opacity="0.3"/>
+        <stop offset="50%" stop-color="#c9a84c" stop-opacity="0.5"/>
+        <stop offset="70%" stop-color="#c9a84c" stop-opacity="0.3"/>
+        <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+      </linearGradient>
+      <mask id="gridMaskV">
+        <rect width="850" height="480" fill="url(#gridFadeV)"/>
+      </mask>
+      <mask id="gridMaskH">
+        <rect width="850" height="480" fill="url(#gridFadeH)"/>
+      </mask>
+    </defs>
 
-    <!-- Header band -->
-    <div class="header-band">
-      <div class="header-series">AI Future Series</div>
-      <div class="header-rule"></div>
-      <div class="header-logo">Filly Coder</div>
-    </div>
+    <!-- Vanishing-point perspective lines from horizon -->
+    <!-- Horizontal perspective lines -->
+    <g mask="url(#gridMaskV)">
+      <!-- Lines converging to vanishing point at (425, 200) -->
+      <!-- Perspective radials -->
+      <line x1="425" y1="200" x2="-50"  y2="480" stroke="#c9a84c" stroke-width="0.5" opacity="0.35"/>
+      <line x1="425" y1="200" x2="70"   y2="480" stroke="#c9a84c" stroke-width="0.5" opacity="0.35"/>
+      <line x1="425" y1="200" x2="190"  y2="480" stroke="#c9a84c" stroke-width="0.5" opacity="0.35"/>
+      <line x1="425" y1="200" x2="310"  y2="480" stroke="#c9a84c" stroke-width="0.5" opacity="0.35"/>
+      <line x1="425" y1="200" x2="370"  y2="480" stroke="#c9a84c" stroke-width="0.5" opacity="0.35"/>
+      <line x1="425" y1="200" x2="425"  y2="480" stroke="#c9a84c" stroke-width="0.5" opacity="0.4"/>
+      <line x1="425" y1="200" x2="480"  y2="480" stroke="#c9a84c" stroke-width="0.5" opacity="0.35"/>
+      <line x1="425" y1="200" x2="540"  y2="480" stroke="#c9a84c" stroke-width="0.5" opacity="0.35"/>
+      <line x1="425" y1="200" x2="660"  y2="480" stroke="#c9a84c" stroke-width="0.5" opacity="0.35"/>
+      <line x1="425" y1="200" x2="780"  y2="480" stroke="#c9a84c" stroke-width="0.5" opacity="0.35"/>
+      <line x1="425" y1="200" x2="900"  y2="480" stroke="#c9a84c" stroke-width="0.5" opacity="0.35"/>
 
-    <!-- Main content -->
-    <div class="main-content">
+      <!-- Horizontal cross lines at increasing depth -->
+      <line x1="60"  y1="290" x2="790" y2="290" stroke="#c9a84c" stroke-width="0.4" opacity="0.2"/>
+      <line x1="30"  y1="330" x2="820" y2="330" stroke="#c9a84c" stroke-width="0.4" opacity="0.25"/>
+      <line x1="0"   y1="370" x2="850" y2="370" stroke="#c9a84c" stroke-width="0.4" opacity="0.28"/>
+      <line x1="0"   y1="415" x2="850" y2="415" stroke="#c9a84c" stroke-width="0.5" opacity="0.2"/>
+      <line x1="0"   y1="455" x2="850" y2="455" stroke="#c9a84c" stroke-width="0.4" opacity="0.13"/>
+    </g>
+  </svg>
 
-      <!-- Title -->
-      <div class="title-block">
-        <div class="eyebrow">A Definitive Guide</div>
-        <div class="main-title">The Opportunity<br>Mindset</div>
-        <div class="title-ornament">
-          <div class="ornament-line"></div>
-          <div class="diamond"></div>
-          <div class="ornament-line"></div>
-        </div>
-        <div class="subtitle">How to Recognize, Create,<br>and Capture Opportunity</div>
-      </div>
+  <!-- Horizon line -->
+  <div class="horizon-line"></div>
 
-      <!-- Golden Key / Open Door Graphic -->
-      <div class="graphic-wrap">
-        <svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="keyGold" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#e8c84a"/>
-              <stop offset="50%" stop-color="#c9a84c"/>
-              <stop offset="100%" stop-color="#a07830"/>
-            </linearGradient>
-            <linearGradient id="doorGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#ddd8cc"/>
-              <stop offset="100%" stop-color="#c8c2b4"/>
-            </linearGradient>
-            <linearGradient id="lightGrad" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stop-color="#fffbe8" stop-opacity="0.0"/>
-              <stop offset="40%" stop-color="#fffbe8" stop-opacity="0.95"/>
-              <stop offset="100%" stop-color="#fffbe8" stop-opacity="0.0"/>
-            </linearGradient>
-            <filter id="keyShadow">
-              <feDropShadow dx="2" dy="3" stdDeviation="4" flood-color="#a07830" flood-opacity="0.35"/>
-            </filter>
-            <filter id="glowLight">
-              <feGaussianBlur stdDeviation="8" result="b"/>
-              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-          </defs>
+  <!-- THE MAIN VISUAL: Rising Sun / Opportunity Burst -->
+  <svg class="visual-container" viewBox="0 0 700 620" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <!-- Main sun radial gradient -->
+      <radialGradient id="sunGrad" cx="50%" cy="60%" r="50%">
+        <stop offset="0%"   stop-color="#fff7d6" stop-opacity="1"/>
+        <stop offset="12%"  stop-color="#f0c842" stop-opacity="1"/>
+        <stop offset="35%"  stop-color="#c9a84c" stop-opacity="0.95"/>
+        <stop offset="65%"  stop-color="#a06820" stop-opacity="0.55"/>
+        <stop offset="100%" stop-color="#1a0a3d"  stop-opacity="0"/>
+      </radialGradient>
 
-          <!-- Light rays from door opening -->
-          <g opacity="0.55" filter="url(#glowLight)">
-            <polygon points="160,60 128,180 192,180" fill="#fffbe8" opacity="0.5"/>
-            <polygon points="160,60 108,200 138,200" fill="#fffbe8" opacity="0.25"/>
-            <polygon points="160,60 182,200 212,200" fill="#fffbe8" opacity="0.25"/>
-          </g>
+      <!-- Outer corona glow -->
+      <radialGradient id="coronaGrad" cx="50%" cy="60%" r="50%">
+        <stop offset="0%"   stop-color="#e8c96a" stop-opacity="0"/>
+        <stop offset="40%"  stop-color="#c9a84c" stop-opacity="0"/>
+        <stop offset="70%"  stop-color="#c9a84c" stop-opacity="0.15"/>
+        <stop offset="100%" stop-color="#e8c96a" stop-opacity="0"/>
+      </radialGradient>
 
-          <!-- Door frame (outer) -->
-          <rect x="85" y="70" width="150" height="210" rx="4" ry="4"
-                fill="#1a2744" stroke="#1a2744" stroke-width="2"/>
+      <!-- Clip: only bottom half shows (sun rising) -->
+      <clipPath id="horizonClip">
+        <rect x="0" y="310" width="700" height="310"/>
+      </clipPath>
 
-          <!-- Door panels (open left side) -->
-          <!-- Left door (swinging open) -->
-          <g transform="translate(85,70) skewX(-18)">
-            <rect x="0" y="0" width="70" height="210" rx="3" ry="3" fill="url(#doorGrad)" stroke="#b8b0a0" stroke-width="1"/>
-            <!-- Panel inset top -->
-            <rect x="8" y="12" width="54" height="80" rx="2" fill="none" stroke="rgba(180,172,160,0.7)" stroke-width="1"/>
-            <!-- Panel inset bottom -->
-            <rect x="8" y="104" width="54" height="94" rx="2" fill="none" stroke="rgba(180,172,160,0.7)" stroke-width="1"/>
-          </g>
+      <!-- Ray glow filter -->
+      <filter id="rayGlow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="3" result="blur"/>
+        <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+      </filter>
 
-          <!-- Right door (closed) -->
-          <rect x="158" y="70" width="77" height="210" rx="3" ry="3" fill="url(#doorGrad)" stroke="#b8b0a0" stroke-width="1"/>
-          <!-- Right door panels -->
-          <rect x="166" y="82" width="61" height="82" rx="2" fill="none" stroke="rgba(180,172,160,0.7)" stroke-width="1"/>
-          <rect x="166" y="174" width="61" height="94" rx="2" fill="none" stroke="rgba(180,172,160,0.7)" stroke-width="1"/>
+      <!-- Sun glow filter -->
+      <filter id="sunGlow" x="-40%" y="-40%" width="180%" height="180%">
+        <feGaussianBlur stdDeviation="18" result="blur"/>
+        <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+      </filter>
 
-          <!-- Bright interior glow (what's beyond the open door) -->
-          <rect x="85" y="70" width="73" height="210" fill="url(#lightGrad)" opacity="0.7"/>
+      <!-- Soft glow filter for halo -->
+      <filter id="haloFilter" x="-60%" y="-60%" width="220%" height="220%">
+        <feGaussianBlur stdDeviation="28" result="blur"/>
+        <feComponentTransfer in="blur">
+          <feFuncA type="linear" slope="0.6"/>
+        </feComponentTransfer>
+      </filter>
 
-          <!-- Door knob right door -->
-          <circle cx="164" cy="180" r="5.5" fill="url(#keyGold)" stroke="#a07830" stroke-width="0.8"/>
-          <circle cx="164" cy="180" r="2.5" fill="#e8d888"/>
+      <!-- Node glow -->
+      <filter id="nodeGlow">
+        <feGaussianBlur stdDeviation="4" result="blur"/>
+        <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+      </filter>
+    </defs>
 
-          <!-- Door frame border -->
-          <rect x="85" y="70" width="150" height="210" rx="4" ry="4"
-                fill="none" stroke="#1a2744" stroke-width="4"/>
-          <!-- Frame inner bevel -->
-          <rect x="89" y="74" width="142" height="202" rx="3" ry="3"
-                fill="none" stroke="rgba(201,168,76,0.4)" stroke-width="1"/>
+    <!-- Outer halo (very soft) -->
+    <ellipse cx="350" cy="370" rx="280" ry="240" fill="url(#coronaGrad)" filter="url(#haloFilter)" opacity="0.8"/>
 
-          <!-- Decorative arch on frame top -->
-          <path d="M 89 74 Q 160 40 231 74" fill="none" stroke="rgba(201,168,76,0.5)" stroke-width="1.5"/>
+    <!-- Sun rays (radiating outward from center, full circle, visible through horizon) -->
+    <g transform="translate(350,370)" filter="url(#rayGlow)">
+      <!-- Long thin rays at intervals -->
+      <g opacity="0.55">
+        <!-- Ray angles: every 15 degrees, 24 rays -->
+        <line x1="0" y1="0" x2="0"   y2="-320" stroke="#e8c96a" stroke-width="1.2" opacity="0.5"/>
+        <line x1="0" y1="0" x2="83"  y2="-310" stroke="#e8c96a" stroke-width="1"   opacity="0.45"/>
+        <line x1="0" y1="0" x2="160" y2="-277" stroke="#e8c96a" stroke-width="1"   opacity="0.4"/>
+        <line x1="0" y1="0" x2="226" y2="-226" stroke="#e8c96a" stroke-width="1.2" opacity="0.5"/>
+        <line x1="0" y1="0" x2="277" y2="-160" stroke="#e8c96a" stroke-width="1"   opacity="0.4"/>
+        <line x1="0" y1="0" x2="310" y2="-83"  stroke="#e8c96a" stroke-width="1"   opacity="0.45"/>
+        <line x1="0" y1="0" x2="320" y2="0"    stroke="#e8c96a" stroke-width="1.2" opacity="0.5"/>
+        <line x1="0" y1="0" x2="310" y2="83"   stroke="#e8c96a" stroke-width="1"   opacity="0.4"/>
+        <line x1="0" y1="0" x2="277" y2="160"  stroke="#e8c96a" stroke-width="1"   opacity="0.35"/>
+        <line x1="0" y1="0" x2="226" y2="226"  stroke="#e8c96a" stroke-width="1.2" opacity="0.4"/>
+        <line x1="0" y1="0" x2="160" y2="277"  stroke="#e8c96a" stroke-width="1"   opacity="0.35"/>
+        <line x1="0" y1="0" x2="83"  y2="310"  stroke="#e8c96a" stroke-width="1"   opacity="0.3"/>
+        <line x1="0" y1="0" x2="0"   y2="320"  stroke="#e8c96a" stroke-width="1.2" opacity="0.35"/>
+        <line x1="0" y1="0" x2="-83"  y2="310" stroke="#e8c96a" stroke-width="1"   opacity="0.3"/>
+        <line x1="0" y1="0" x2="-160" y2="277" stroke="#e8c96a" stroke-width="1"   opacity="0.35"/>
+        <line x1="0" y1="0" x2="-226" y2="226" stroke="#e8c96a" stroke-width="1.2" opacity="0.4"/>
+        <line x1="0" y1="0" x2="-277" y2="160" stroke="#e8c96a" stroke-width="1"   opacity="0.35"/>
+        <line x1="0" y1="0" x2="-310" y2="83"  stroke="#e8c96a" stroke-width="1"   opacity="0.4"/>
+        <line x1="0" y1="0" x2="-320" y2="0"   stroke="#e8c96a" stroke-width="1.2" opacity="0.5"/>
+        <line x1="0" y1="0" x2="-310" y2="-83" stroke="#e8c96a" stroke-width="1"   opacity="0.45"/>
+        <line x1="0" y1="0" x2="-277" y2="-160" stroke="#e8c96a" stroke-width="1"  opacity="0.4"/>
+        <line x1="0" y1="0" x2="-226" y2="-226" stroke="#e8c96a" stroke-width="1.2" opacity="0.5"/>
+        <line x1="0" y1="0" x2="-160" y2="-277" stroke="#e8c96a" stroke-width="1"  opacity="0.4"/>
+        <line x1="0" y1="0" x2="-83"  y2="-310" stroke="#e8c96a" stroke-width="1"  opacity="0.45"/>
+      </g>
 
-          <!-- THE GOLDEN KEY -->
-          <!-- Key bow (ring) -->
-          <g filter="url(#keyShadow)">
-            <circle cx="195" cy="235" r="22" fill="none" stroke="url(#keyGold)" stroke-width="7"/>
-            <circle cx="195" cy="235" r="11" fill="none" stroke="url(#keyGold)" stroke-width="2.5"/>
-            <!-- Key blade (shaft) -->
-            <rect x="192" y="254" width="6" height="40" rx="3" fill="url(#keyGold)"/>
-            <!-- Key teeth -->
-            <rect x="198" y="270" width="10" height="5" rx="1.5" fill="url(#keyGold)"/>
-            <rect x="198" y="282" width="7"  height="4" rx="1.5" fill="url(#keyGold)"/>
-            <rect x="198" y="292" width="10" height="4" rx="1.5" fill="url(#keyGold)"/>
-          </g>
+      <!-- Thicker accent rays (8 bold ones) -->
+      <g opacity="0.7">
+        <line x1="0" y1="0" x2="0"    y2="-340" stroke="#fff0a0" stroke-width="2.5" opacity="0.6"/>
+        <line x1="0" y1="0" x2="240"  y2="-240" stroke="#fff0a0" stroke-width="2"   opacity="0.5"/>
+        <line x1="0" y1="0" x2="340"  y2="0"    stroke="#fff0a0" stroke-width="2.5" opacity="0.5"/>
+        <line x1="0" y1="0" x2="240"  y2="240"  stroke="#fff0a0" stroke-width="2"   opacity="0.4"/>
+        <line x1="0" y1="0" x2="0"    y2="340"  stroke="#fff0a0" stroke-width="2.5" opacity="0.4"/>
+        <line x1="0" y1="0" x2="-240" y2="240"  stroke="#fff0a0" stroke-width="2"   opacity="0.4"/>
+        <line x1="0" y1="0" x2="-340" y2="0"    stroke="#fff0a0" stroke-width="2.5" opacity="0.5"/>
+        <line x1="0" y1="0" x2="-240" y2="-240" stroke="#fff0a0" stroke-width="2"   opacity="0.5"/>
+      </g>
+    </g>
 
-          <!-- "OPPORTUNITY AWAITS" bottom text -->
-          <text x="160" y="306" text-anchor="middle"
-                font-family="Lora,serif" font-style="italic" font-size="10.5"
-                fill="#c9a84c" letter-spacing="0.18em" opacity="0.85">Opportunity Awaits</text>
+    <!-- Network nodes floating in upper half — opportunity connections -->
+    <g opacity="0.75" filter="url(#nodeGlow)">
+      <!-- Connection lines between nodes -->
+      <line x1="140" y1="80"  x2="270" y2="140" stroke="#c9a84c" stroke-width="0.8" opacity="0.4"/>
+      <line x1="270" y1="140" x2="350" y2="180" stroke="#c9a84c" stroke-width="0.8" opacity="0.4"/>
+      <line x1="350" y1="180" x2="480" y2="110" stroke="#c9a84c" stroke-width="0.8" opacity="0.4"/>
+      <line x1="480" y1="110" x2="580" y2="60"  stroke="#c9a84c" stroke-width="0.8" opacity="0.35"/>
+      <line x1="350" y1="180" x2="430" y2="250" stroke="#c9a84c" stroke-width="0.8" opacity="0.35"/>
+      <line x1="430" y1="250" x2="560" y2="210" stroke="#c9a84c" stroke-width="0.8" opacity="0.35"/>
+      <line x1="270" y1="140" x2="200" y2="230" stroke="#c9a84c" stroke-width="0.8" opacity="0.35"/>
+      <line x1="140" y1="80"  x2="90"  y2="170" stroke="#c9a84c" stroke-width="0.8" opacity="0.3"/>
 
-          <!-- Decorative dots -->
-          <circle cx="130" cy="306" r="2" fill="#c9a84c" opacity="0.5"/>
-          <circle cx="190" cy="306" r="2" fill="#c9a84c" opacity="0.5"/>
+      <!-- Nodes -->
+      <circle cx="140" cy="80"  r="5"   fill="#e8c96a" opacity="0.9"/>
+      <circle cx="140" cy="80"  r="10"  fill="none" stroke="#c9a84c" stroke-width="1" opacity="0.4"/>
+      <circle cx="270" cy="140" r="4"   fill="#e8c96a" opacity="0.85"/>
+      <circle cx="270" cy="140" r="9"   fill="none" stroke="#c9a84c" stroke-width="1" opacity="0.35"/>
+      <circle cx="350" cy="180" r="6.5" fill="#fff0a0" opacity="0.95"/>
+      <circle cx="350" cy="180" r="14"  fill="none" stroke="#e8c96a" stroke-width="1.2" opacity="0.5"/>
+      <circle cx="480" cy="110" r="4.5" fill="#e8c96a" opacity="0.85"/>
+      <circle cx="480" cy="110" r="10"  fill="none" stroke="#c9a84c" stroke-width="1" opacity="0.35"/>
+      <circle cx="580" cy="60"  r="3.5" fill="#c9a84c" opacity="0.75"/>
+      <circle cx="430" cy="250" r="4"   fill="#e8c96a" opacity="0.8"/>
+      <circle cx="560" cy="210" r="3.5" fill="#c9a84c" opacity="0.7"/>
+      <circle cx="200" cy="230" r="3.5" fill="#c9a84c" opacity="0.7"/>
+      <circle cx="90"  cy="170" r="3"   fill="#c9a84c" opacity="0.6"/>
+    </g>
 
-        </svg>
-      </div>
+    <!-- Sun disc (half visible above horizon) -->
+    <circle cx="350" cy="370" r="165" fill="url(#sunGrad)" filter="url(#sunGlow)"/>
 
-      <!-- Pull quote -->
-      <div class="pull-quote">
-        <p>"Every great achievement begins with the ability to see what others overlook — and the courage to act on it."</p>
-      </div>
+    <!-- Inner bright core -->
+    <circle cx="350" cy="370" r="70" fill="#fff9e6" opacity="0.92"/>
+    <circle cx="350" cy="370" r="40" fill="#ffffff" opacity="0.85"/>
 
-    </div>
+    <!-- Horizon cover (hides bottom of sun below grid) -->
+    <rect x="0" y="500" width="700" height="120" fill="none"/>
 
-    <!-- Footer band -->
-    <div class="footer-band">
-      <div class="author-block">
-        <div class="author-label">Written by</div>
-        <div class="author-name">Bernard Baah</div>
-      </div>
-      <div class="footer-right">
-        <div class="footer-series">Filly Coder</div>
-        <div class="footer-series">AI Future Series</div>
-      </div>
-    </div>
+  </svg>
 
+  <!-- TEXT LAYERS -->
+
+  <!-- Series tag top -->
+  <div class="cover-text series-tag">Filly Coder &nbsp;·&nbsp; AI Future Series</div>
+  <div class="top-rule"></div>
+
+  <!-- Main Title -->
+  <div class="cover-text title">
+    THE<br/>OPPORTUNITY<br/><span class="highlight">MINDSET</span>
   </div>
 
-  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-  <script>
-    function downloadCover() {
-      const btn = document.getElementById('dl-btn');
-      btn.style.display = 'none';
-      html2canvas(document.getElementById('cover'), {
-        scale: 3,
-        useCORS: true,
-        width: 850,
-        height: 1100,
-        backgroundColor: '#f7f4ee'
-      }).then(canvas => {
-        const link = document.createElement('a');
-        link.download = 'opportunity-mindset-cover-C.png';
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-        btn.style.display = 'block';
-      });
-    }
-  </script>
+  <!-- Subtitle -->
+  <div class="cover-text subtitle">
+    How to Recognize, Create,<br/>and Capture Opportunity
+  </div>
+
+  <!-- Author -->
+  <div class="cover-text author">Bernard Baah</div>
+
+  <!-- Bottom rule + series -->
+  <div class="bottom-rule"></div>
+  <div class="cover-text series-bottom">Filly Coder &nbsp;·&nbsp; AI Future Series</div>
+
+</div>
+
+<!-- DOWNLOAD BUTTON -->
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<button id="dl-btn" onclick="downloadCover()">⬇ Download Cover (KDP Ready)</button>
+<script>
+function downloadCover() {
+  const btn = document.getElementById('dl-btn');
+  btn.style.opacity = '0.4';
+  btn.disabled = true;
+  html2canvas(document.getElementById('cover'), {
+    scale: 3, useCORS: true, width: 850, height: 1100, backgroundColor: null
+  }).then(canvas => {
+    const link = document.createElement('a');
+    link.download = 'opportunity-mindset-cover.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    btn.style.opacity = '1';
+    btn.disabled = false;
+  });
+}
+</script>
+
 </body>
 </html>
