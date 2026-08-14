@@ -388,30 +388,59 @@
 </div><!-- /cover -->
 
 <!-- ════════════════════════════════════════════════════════════════
-     DOWNLOAD BUTTON
+     DOWNLOAD BUTTONS
 ════════════════════════════════════════════════════════════════ -->
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-<button id="dl-btn" onclick="downloadCover()">⬇ Download Cover (KDP Ready)</button>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+  .dl-group { display:flex; gap:10px; position:fixed; bottom:28px; left:50%; transform:translateX(-50%); z-index:9999; }
+  .dl-group button {
+    padding: 11px 22px; border: 2px solid #0e1f3d; border-radius: 3px; cursor: pointer;
+    font-family: 'Cormorant Garamond', serif; font-size: 14px; letter-spacing: .08em;
+    background: #0e1f3d; color: #f5f0e8; font-weight: 600;
+    box-shadow: 0 4px 16px rgba(0,0,0,.25); transition: opacity .2s;
+  }
+  .dl-group button:disabled { opacity:.4; cursor:not-allowed; }
+  .dl-group button:not(:disabled):hover { opacity:.8; }
+</style>
+<div class="dl-group">
+  <button id="dl-jpg" onclick="downloadJPG()">⬇ Download JPG</button>
+  <button id="dl-pdf" onclick="downloadPDF()">⬇ Download PDF</button>
+</div>
 <script>
-function downloadCover() {
-  const btn = document.getElementById('dl-btn');
-  btn.style.opacity = '0.4';
-  btn.disabled = true;
-  html2canvas(document.getElementById('cover'), {
-    scale: 3,
-    useCORS: true,
-    width: 850,
-    height: 1100,
-    backgroundColor: null
-  }).then(canvas => {
-    const link = document.createElement('a');
-    link.download = 'opportunity-mindset-cover.png';
-    link.href = canvas.toDataURL('image/png');
-    link.click();
-    btn.style.opacity = '1';
-    btn.disabled = false;
+function renderCover() {
+  return html2canvas(document.getElementById('cover'), {
+    scale: 3, useCORS: true, width: 850, height: 1100, backgroundColor: '#f5f0e8'
   });
 }
+function setBtns(disabled) {
+  ['dl-jpg','dl-pdf'].forEach(id => { const b=document.getElementById(id); b.disabled=disabled; });
+}
+function downloadJPG() {
+  setBtns(true);
+  renderCover().then(canvas => {
+    const link = document.createElement('a');
+    link.download = 'opportunity-mindset-cover-b.jpg';
+    link.href = canvas.toDataURL('image/jpeg', 0.95);
+    link.click();
+    setBtns(false);
+  });
+}
+function downloadPDF() {
+  setBtns(true);
+  renderCover().then(canvas => {
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF({ orientation:'portrait', unit:'mm', format:[152.4, 228.6] });
+    pdf.addImage(canvas.toDataURL('image/jpeg',0.95), 'JPEG', 0, 0, 152.4, 228.6);
+    pdf.save('opportunity-mindset-cover-b.pdf');
+    setBtns(false);
+  });
+}
+window.addEventListener('DOMContentLoaded', () => {
+  const p = new URLSearchParams(location.search).get('download');
+  if (p === 'jpg') setTimeout(downloadJPG, 800);
+  if (p === 'pdf') setTimeout(downloadPDF, 800);
+});
 </script>
 
 </body>

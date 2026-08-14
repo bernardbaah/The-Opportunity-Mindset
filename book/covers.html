@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cover Gallery — The Opportunity Mindset</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #070f1f;
+      color: #e8e0d0;
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+    }
+
+    /* ── Header ─────────────────────────────────────────────── */
+    header {
+      background: #0a1628;
+      border-bottom: 1px solid rgba(201,168,76,.25);
+      padding: 28px 40px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    header a.back {
+      color: #c9a84c;
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: .06em;
+      opacity: .75;
+      transition: opacity .2s;
+    }
+    header a.back:hover { opacity: 1; }
+    header .divider { width: 1px; height: 32px; background: rgba(201,168,76,.3); }
+    header .title-block {}
+    header .series {
+      font-size: 10px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: #c9a84c;
+      opacity: .7;
+      margin-bottom: 4px;
+    }
+    header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: #f0e8d8;
+      letter-spacing: .02em;
+    }
+
+    /* ── Grid ────────────────────────────────────────────────── */
+    main {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 56px 32px 80px;
+    }
+
+    .intro {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+    .intro p {
+      font-size: 14px;
+      color: rgba(232,224,208,.55);
+      letter-spacing: .04em;
+      line-height: 1.7;
+    }
+
+    .covers-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 36px;
+    }
+
+    /* ── Card ─────────────────────────────────────────────────── */
+    .card {
+      background: #0d1b30;
+      border: 1px solid rgba(201,168,76,.15);
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color .25s, box-shadow .25s;
+    }
+    .card:hover {
+      border-color: rgba(201,168,76,.45);
+      box-shadow: 0 8px 40px rgba(0,0,0,.5);
+    }
+
+    .preview-wrap {
+      position: relative;
+      background: #000;
+      height: 340px;
+      overflow: hidden;
+    }
+    .preview-wrap iframe {
+      width: 200%;
+      height: 200%;
+      border: none;
+      transform: scale(0.5);
+      transform-origin: top left;
+      pointer-events: none;
+    }
+    .preview-overlay {
+      position: absolute;
+      inset: 0;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      padding: 12px;
+      background: linear-gradient(to top, rgba(7,15,31,.6) 0%, transparent 60%);
+    }
+    .preview-overlay a {
+      font-size: 11px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #c9a84c;
+      text-decoration: none;
+      background: rgba(7,15,31,.7);
+      padding: 6px 12px;
+      border: 1px solid rgba(201,168,76,.4);
+      border-radius: 3px;
+      backdrop-filter: blur(4px);
+      transition: background .2s;
+    }
+    .preview-overlay a:hover { background: rgba(201,168,76,.15); }
+
+    .card-body {
+      padding: 20px 22px 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .card-label {
+      font-size: 10px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: #c9a84c;
+      opacity: .7;
+    }
+    .card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: #f0e8d8;
+    }
+    .card-desc {
+      font-size: 12px;
+      color: rgba(232,224,208,.5);
+      line-height: 1.6;
+      margin-top: 4px;
+    }
+
+    /* ── Download buttons ─────────────────────────────────────── */
+    .btn-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 18px;
+    }
+    .btn {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .05em;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: opacity .2s, background .2s;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg,#c9a84c,#e8cc7a);
+      color: #0a1628;
+    }
+    .btn-primary:hover { opacity: .88; }
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid rgba(201,168,76,.4);
+      color: #c9a84c;
+    }
+    .btn-ghost:hover { background: rgba(201,168,76,.08); }
+
+    /* ── Footer note ──────────────────────────────────────────── */
+    .note {
+      text-align: center;
+      margin-top: 56px;
+      font-size: 12px;
+      color: rgba(232,224,208,.3);
+      line-height: 1.8;
+    }
+    .note span { color: rgba(201,168,76,.5); }
+
+    /* ── Responsive ───────────────────────────────────────────── */
+    @media (max-width: 860px) {
+      .covers-grid { grid-template-columns: 1fr; }
+      .preview-wrap { height: 420px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a class="back" href="/">← Book Reader</a>
+    <div class="divider"></div>
+    <div class="title-block">
+      <div class="series">Filly Coder · AI Future Series</div>
+      <h1>The Opportunity Mindset — Cover Gallery</h1>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>Three KDP-ready cover designs · Click <strong style="color:#c9a84c">View</strong> to open full-size &nbsp;·&nbsp; Download as <strong style="color:#c9a84c">JPG</strong> or <strong style="color:#c9a84c">PDF</strong> (6″ × 9″ at 300 dpi)</p>
+    </div>
+
+    <div class="covers-grid">
+
+      <!-- Cover A -->
+      <div class="card">
+        <div class="preview-wrap">
+          <iframe src="/cover/index.html" loading="lazy" title="Cover A preview" scrolling="no"></iframe>
+          <div class="preview-overlay">
+            <a href="/cover/index.html" target="_blank">View Full Size ↗</a>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-label">Cover A</div>
+          <div class="card-name">Dark Elegance</div>
+          <div class="card-desc">Deep navy field, gold compass rose, serif Cormorant Garamond — authoritative and timeless.</div>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="/cover/index.html?download=jpg" target="_blank">⬇ JPG</a>
+            <a class="btn btn-ghost" href="/cover/index.html?download=pdf" target="_blank">⬇ PDF</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cover B -->
+      <div class="card">
+        <div class="preview-wrap">
+          <iframe src="/cover/index_variant2.html" loading="lazy" title="Cover B preview" scrolling="no"></iframe>
+          <div class="preview-overlay">
+            <a href="/cover/index_variant2.html" target="_blank">View Full Size ↗</a>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-label">Cover B</div>
+          <div class="card-name">Light &amp; Refined</div>
+          <div class="card-desc">Warm cream background, bold typographic title in deep navy, gold ornamental divider — publisher-quality restraint.</div>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="/cover/index_variant2.html?download=jpg" target="_blank">⬇ JPG</a>
+            <a class="btn btn-ghost" href="/cover/index_variant2.html?download=pdf" target="_blank">⬇ PDF</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cover C -->
+      <div class="card">
+        <div class="preview-wrap">
+          <iframe src="/cover/index_variant3.html" loading="lazy" title="Cover C preview" scrolling="no"></iframe>
+          <div class="preview-overlay">
+            <a href="/cover/index_variant3.html" target="_blank">View Full Size ↗</a>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-label">Cover C</div>
+          <div class="card-name">Bold &amp; Symbolic</div>
+          <div class="card-desc">Indigo-to-teal gradient, radiating gold network motif, bold all-caps title — high energy and visually striking.</div>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="/cover/index_variant3.html?download=jpg" target="_blank">⬇ JPG</a>
+            <a class="btn btn-ghost" href="/cover/index_variant3.html?download=pdf" target="_blank">⬇ PDF</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="note">
+      JPG files are high-resolution JPEG at 95% quality &nbsp;·&nbsp; PDF files are sized to KDP trim <span>6″ × 9″ (152.4 × 228.6 mm)</span><br/>
+      The cover page opens briefly to render, then the download starts automatically.
+    </p>
+  </main>
+
+</body>
+</html>
