@@ -367,7 +367,7 @@ def process_file(pdf, filepath, is_first=False):
 def generate_pdf():
     print("Generating PDF (8.5\" × 11\")...")
 
-    pdf = BookPDF()
+    pdf = BookPDF(format='letter')   # 8.5" × 11" = 215.9 × 279.4 mm
     pdf.add_font('DejaVu', '',   FONT_R)
     pdf.add_font('DejaVu', 'B',  FONT_B)
     pdf.add_font('DejaVu', 'I',  FONT_I)
