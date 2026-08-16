@@ -40,6 +40,34 @@
   .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
   #chapter-counter { color: var(--gray); font-size: 0.8rem; white-space: nowrap; }
 
+  /* Downloads dropdown */
+  .dl-dropdown { position: relative; }
+  .dl-btn {
+    background: var(--navy-light); border: 1px solid var(--gold); color: var(--gold);
+    padding: 6px 14px; border-radius: 4px; cursor: pointer; font-size: 0.82rem;
+    transition: background 0.2s; white-space: nowrap;
+  }
+  .dl-btn:hover { background: var(--gold); color: var(--navy); }
+  .dl-menu {
+    display: none; position: absolute; right: 0; top: calc(100% + 6px);
+    background: var(--navy-mid); border: 1px solid var(--gold);
+    border-radius: 6px; min-width: 220px; z-index: 9999;
+    box-shadow: 0 8px 32px rgba(0,0,0,.5); overflow: hidden;
+  }
+  .dl-dropdown:hover .dl-menu,
+  .dl-dropdown:focus-within .dl-menu { display: block; }
+  .dl-menu a {
+    display: flex; align-items: center; gap: 10px;
+    padding: 11px 16px; color: var(--white); text-decoration: none;
+    font-size: 0.82rem; transition: background .15s;
+    border-bottom: 1px solid var(--navy-light);
+  }
+  .dl-menu a:last-child { border-bottom: none; }
+  .dl-menu a:hover { background: rgba(201,168,76,.12); color: var(--gold); }
+  .dl-menu .dl-icon { font-size: 1rem; width: 20px; text-align: center; }
+  .dl-menu .dl-label { flex: 1; }
+  .dl-menu .dl-size { font-size: 0.72rem; color: var(--gray); }
+
   /* Layout */
   #layout { display: flex; height: 100vh; padding-top: calc(var(--topbar-h) + 3px); }
 
@@ -154,6 +182,26 @@
   <span id="chapter-counter"></span>
   <button class="nav-btn" id="prev-btn" onclick="navigate(-1)" disabled>← Prev</button>
   <button class="nav-btn" id="next-btn" onclick="navigate(1)">Next →</button>
+  <div class="dl-dropdown">
+    <button class="dl-btn">⬇ Download</button>
+    <div class="dl-menu">
+      <a href="/downloads/the-opportunity-mindset.docx" download>
+        <span class="dl-icon">📄</span>
+        <span class="dl-label">Word Document (.docx)</span>
+        <span class="dl-size">564 KB</span>
+      </a>
+      <a href="/downloads/the-opportunity-mindset-print.html" target="_blank">
+        <span class="dl-icon">🖨</span>
+        <span class="dl-label">PDF (Print to PDF)</span>
+        <span class="dl-size">1.5 MB</span>
+      </a>
+      <a href="/covers.html" target="_blank">
+        <span class="dl-icon">🎨</span>
+        <span class="dl-label">Cover Gallery (JPG / PDF)</span>
+        <span class="dl-size">3 variants</span>
+      </a>
+    </div>
+  </div>
 </div>
 
 <div id="layout">
