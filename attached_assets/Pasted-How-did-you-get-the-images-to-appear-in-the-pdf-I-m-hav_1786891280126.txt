@@ -1,0 +1,44 @@
+How did you get the images to appear in the pdf? I'm having a challenge getting them to appear in my other book and I need to tell Replit how you did this
+Just now
+Explaining image embedding techniques
+
+Here's the exact problem and fix — save this for your next book:
+The Problem: page.pdf() silently breaks <img> data URIs
+
+When Puppeteer generates a PDF via page.pdf(), Chrome internally switches to @media print mode. In that mode, <img src="data:image/jpeg;base64,..."> elements stop decoding — their naturalWidth drops to 0 and their rendered height collapses to 0px. The images vanish with no error, no warning, nothing. This happens even though the exact same base64 data renders perfectly fine in a normal browser screenshot (page.screenshot()).
+The Fix: Replace <img> with <div> + background-image
+
+background-image: url('data:...') does render correctly in print mode, as long as you pass printBackground: true to page.pdf().
+
+The replacement pattern for every photo:
+
+Before (broken in PDF):
+<img src="data:image/jpeg;base64,/9j/..." style="width:100%; height:auto;">
+
+After (works in PDF):
+<div style="
+  width: 100%;
+  height: 240px;              /* must be explicit — background-image divs need a set height */
+  background-image: url('data:image/jpeg;base64,/9j/...');
+  background-size: cover;
+  background-position: center;
+  border-radius: 4px;
+">
+</div>
+
+And in page.pdf():
+await page.pdf({
+  printBackground: true,   // ← required, or background-image is also stripped
+  ...
+});
+The full pipeline that works
+
+    Fetch images server-side (Node.js fetch → Buffer → base64). Don't rely on Chrome fetching external URLs at render time — it often can't reach them or hits CORS.
+
+    Write the HTML to a temp file, then navigate to it with page.goto('file:///tmp/book.html') instead of page.setContent(html). This avoids a 10 MB CDP payload limit that causes setContent() to silently fail on large documents.
+
+    Replace every <img> with a <div> using background-image before writing the HTML file.
+
+    Call page.pdf({ printBackground: true }).
+
+That's the complete recipe. The <img> → background-image swap is the non-obvious part that took the most debugging to find.

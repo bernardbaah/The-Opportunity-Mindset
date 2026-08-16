@@ -7,12 +7,45 @@ Run from workspace root: python3 book/generate_exports.py
 import os
 import re
 import glob
+import io
+import base64
+import time
+import urllib.request
 from pathlib import Path
 from docx import Document
 from docx.shared import Pt, RGBColor, Inches, Cm
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
+
+# ── Image cache ──────────────────────────────────────────────────────────
+# Maps URL → (base64_data_uri, raw_bytes) so each image is fetched once
+_IMAGE_CACHE = {}
+
+def fetch_image(url):
+    """Download an image URL and return (data_uri, bytes). Returns None on failure."""
+    if url in _IMAGE_CACHE:
+        return _IMAGE_CACHE[url]
+    # Use a smaller resolution for Pexels to keep file sizes sane
+    url_dl = re.sub(r'w=\d+', 'w=900', url)
+    url_dl = re.sub(r'h=\d+', 'h=540', url_dl)
+    try:
+        req = urllib.request.Request(url_dl, headers={
+            'User-Agent': 'Mozilla/5.0 (compatible; BookExporter/1.0)'
+        })
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            raw = resp.read()
+        ct = resp.headers.get('Content-Type', 'image/jpeg').split(';')[0].strip()
+        if not ct.startswith('image/'):
+            ct = 'image/jpeg'
+        b64 = base64.b64encode(raw).decode('ascii')
+        data_uri = f'data:{ct};base64,{b64}'
+        _IMAGE_CACHE[url] = (data_uri, raw)
+        return data_uri, raw
+    except Exception as e:
+        print(f"    [warn] Could not fetch image: {url_dl} — {e}")
+        _IMAGE_CACHE[url] = None
+        return None
 
 # ── File order ─────────────────────────────────────────────────────────
 BOOK_FILES = [
@@ -282,6 +315,35 @@ def process_file_to_docx(doc, filepath, is_first=False):
             i += 1
             continue
 
+        # Markdown image: ![alt](url)
+        img_m = re.match(r'!\[([^\]]*)\]\(([^)]+)\)', stripped)
+        if img_m:
+            flush_list()
+            alt_text = img_m.group(1)
+            img_url  = img_m.group(2).strip()
+            result = fetch_image(img_url)
+            if result:
+                _, raw_bytes = result
+                try:
+                    stream = io.BytesIO(raw_bytes)
+                    doc.add_picture(stream, width=Inches(4.25))
+                    last_para = doc.paragraphs[-1]
+                    last_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                    if alt_text:
+                        cap = doc.add_paragraph(alt_text)
+                        cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                        for run in cap.runs:
+                            run.italic = True
+                            run.font.size = Pt(9)
+                            run.font.color.rgb = RGBColor(0x7A, 0x6A, 0x5A)
+                except Exception as e:
+                    print(f"    [warn] Could not embed image in DOCX: {e}")
+                    doc.add_paragraph(f'[Image: {alt_text}]')
+            else:
+                doc.add_paragraph(f'[Image: {alt_text}]')
+            i += 1
+            continue
+
         # Regular paragraph
         flush_list()
         add_paragraph_with_inline(doc, stripped, base_size=12)
@@ -477,6 +539,24 @@ def md_to_html_block(text):
         else:
             if in_list: out.append('</ul>'); in_list = False
 
+        # Markdown image: ![alt](url)
+        img_m = re.match(r'!\[([^\]]*)\]\(([^)]+)\)', stripped)
+        if img_m:
+            alt = html_lib.escape(img_m.group(1))
+            url = img_m.group(2).strip()
+            result = fetch_image(url)
+            if result:
+                data_uri, _ = result
+                out.append(
+                    f'<div class="book-image" style="background-image:url(\'{data_uri}\')" '
+                    f'role="img" aria-label="{alt}"></div>'
+                )
+                if alt:
+                    out.append(f'<p class="img-caption">{alt}</p>')
+            else:
+                out.append(f'<p class="img-placeholder">[Image: {alt}]</p>')
+            continue
+
         out.append(f'<p>{inline_md(stripped)}</p>')
 
     if in_list: out.append('</ul>')
@@ -623,6 +703,35 @@ ul, ol {{ margin: 10pt 0 10pt 24pt; }}
 li {{ margin-bottom: 4pt; }}
 
 hr {{ border: none; border-top: 1px solid #D0C0B0; margin: 32px 0; }}
+
+/* Images */
+.book-image {{
+  width: 100%;
+  height: 280px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 4px;
+  margin: 20px 0 6px;
+  page-break-inside: avoid;
+}}
+.img-caption {{
+  text-align: center;
+  font-style: italic;
+  font-size: 9.5pt;
+  color: #7A6655;
+  margin-bottom: 16pt;
+  text-indent: 0 !important;
+}}
+.img-placeholder {{
+  text-align: center;
+  color: #aaa;
+  font-style: italic;
+  font-size: 9pt;
+  padding: 20px;
+  border: 1px dashed #ddd;
+  margin: 16px 0;
+}}
 
 table {{ width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 10pt; page-break-inside: avoid; }}
 th {{ background: #1C2533; color: #F0E8D8; padding: 8px 10px; text-align: left; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 9.5pt; }}
