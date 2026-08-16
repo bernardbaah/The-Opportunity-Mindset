@@ -362,14 +362,14 @@ def generate_docx():
     print("Generating DOCX...")
     doc = Document()
 
-    # Page setup: 6"×9" trim
+    # Page setup: 8.5"×11" letter
     section = doc.sections[0]
-    section.page_width  = Inches(6)
-    section.page_height = Inches(9)
-    section.left_margin   = Inches(0.875)
-    section.right_margin  = Inches(0.875)
-    section.top_margin    = Inches(0.75)
-    section.bottom_margin = Inches(0.75)
+    section.page_width  = Inches(8.5)
+    section.page_height = Inches(11)
+    section.left_margin   = Inches(1.0)
+    section.right_margin  = Inches(1.0)
+    section.top_margin    = Inches(1.0)
+    section.bottom_margin = Inches(1.0)
 
     # Default paragraph style
     style = doc.styles['Normal']
@@ -750,8 +750,8 @@ tr:nth-child(even) td {{ background: #faf7f3; }}
   }}
 
   @page {{
-    size: 6in 9in;
-    margin: 0.75in 0.875in;
+    size: 8.5in 11in;
+    margin: 1in;
     @top-center {{ content: "The Opportunity Mindset"; font-size: 9pt; color: #9A8070; }}
     @bottom-center {{ content: counter(page); font-size: 9pt; }}
   }}
