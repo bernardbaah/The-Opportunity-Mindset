@@ -134,16 +134,16 @@ def process_file(pdf, filepath, is_first=False):
             pdf.set_text_color(26, 26, 24)
             # Bullet + indented text
             pdf.set_x(pdf.l_margin + 2)
-            pdf.cell(5, 6, '\xe2\x80\xa2'.encode('latin-1', 'replace').decode('latin-1'))
+            pdf.cell(5, 5.5, '\xe2\x80\xa2'.encode('latin-1', 'replace').decode('latin-1'))
             pdf.set_x(pdf.l_margin + 8)
             try:
                 pdf.multi_cell(
-                    PAGE_W - 2 * MARGIN - 8, 6, clean,
+                    PAGE_W - 2 * MARGIN - 8, 5.5, clean,
                     markdown=True, new_x='LMARGIN', new_y='NEXT'
                 )
             except Exception:
                 pdf.multi_cell(
-                    PAGE_W - 2 * MARGIN - 8, 6, strip_md(clean),
+                    PAGE_W - 2 * MARGIN - 8, 5.5, strip_md(clean),
                     new_x='LMARGIN', new_y='NEXT'
                 )
         list_items.clear()
@@ -204,7 +204,7 @@ def process_file(pdf, filepath, is_first=False):
                 img = PILImage.open(str(path))
                 text_w = PAGE_W - 2 * MARGIN
                 aspect = img.height / img.width
-                img_h = min(text_w * aspect, 75.0)  # cap at 75mm
+                img_h = min(text_w * aspect, 55.0)  # cap at 55mm
                 img_w = img_h / aspect if img_h == 75.0 else text_w
                 if pdf.get_y() + img_h + 15 > PAGE_H - MARGIN:
                     pdf.add_page()
@@ -264,7 +264,7 @@ def process_file(pdf, filepath, is_first=False):
         # Blank line
         if not s.strip():
             flush_list()
-            pdf.ln(3)
+            pdf.ln(1)
             continue
 
         # Heading
@@ -275,43 +275,42 @@ def process_file(pdf, filepath, is_first=False):
             text  = strip_md(hm.group(2)).strip()
             pdf.set_text_color(28, 37, 51)
             if level == 1:
-                if pdf.get_y() > PAGE_H * 0.65:
+                if pdf.get_y() > PAGE_H * 0.72:
                     pdf.add_page()
                 else:
-                    pdf.ln(12)
-                pdf.set_font('DejaVu', 'B', 22)
-                pdf.multi_cell(0, 11, text, new_x='LMARGIN', new_y='NEXT')
-                y = pdf.get_y() + 2
+                    pdf.ln(6)
+                pdf.set_font('DejaVu', 'B', 18)
+                pdf.multi_cell(0, 9, text, new_x='LMARGIN', new_y='NEXT')
+                y = pdf.get_y() + 1
                 pdf.set_draw_color(181, 74, 28)
                 pdf.set_line_width(0.8)
                 pdf.line(pdf.l_margin, y, PAGE_W - pdf.r_margin, y)
                 pdf.set_line_width(0.2)
-                pdf.ln(8)
+                pdf.ln(4)
             elif level == 2:
-                pdf.ln(7)
-                pdf.set_font('DejaVu', 'B', 16)
-                pdf.multi_cell(0, 9, text, new_x='LMARGIN', new_y='NEXT')
-                pdf.ln(3)
-            elif level == 3:
-                pdf.ln(5)
-                pdf.set_font('DejaVu', 'B', 13)
+                pdf.ln(4)
+                pdf.set_font('DejaVu', 'B', 14)
                 pdf.multi_cell(0, 7, text, new_x='LMARGIN', new_y='NEXT')
                 pdf.ln(2)
-            else:
+            elif level == 3:
                 pdf.ln(3)
                 pdf.set_font('DejaVu', 'B', 12)
-                pdf.multi_cell(0, 7, text, new_x='LMARGIN', new_y='NEXT')
+                pdf.multi_cell(0, 6, text, new_x='LMARGIN', new_y='NEXT')
                 pdf.ln(1)
+            else:
+                pdf.ln(2)
+                pdf.set_font('DejaVu', 'B', 11)
+                pdf.multi_cell(0, 6, text, new_x='LMARGIN', new_y='NEXT')
             pdf.set_text_color(26, 26, 24)
             continue
 
         # Horizontal rule
         if re.match(r'^[-*_]{3,}$', s.strip()):
-            pdf.ln(4)
+            pdf.ln(2)
             pdf.set_draw_color(200, 185, 170)
             pdf.set_line_width(0.3)
             pdf.line(pdf.l_margin, pdf.get_y(), PAGE_W - pdf.r_margin, pdf.get_y())
-            pdf.ln(8)
+            pdf.ln(4)
             continue
 
         # Blockquote
@@ -320,9 +319,9 @@ def process_file(pdf, filepath, is_first=False):
             content = strip_md(re.sub(r'^>\s*', '', s))
             bq_y = pdf.get_y()
             pdf.set_x(pdf.l_margin + 5)
-            pdf.set_font('DejaVu', 'I', 11)
+            pdf.set_font('DejaVu', 'I', 10)
             pdf.set_text_color(90, 74, 58)
-            pdf.multi_cell(PAGE_W - 2 * MARGIN - 5, 6.5, content,
+            pdf.multi_cell(PAGE_W - 2 * MARGIN - 5, 5.5, content,
                            new_x='LMARGIN', new_y='NEXT')
             bq_end = pdf.get_y()
             pdf.set_draw_color(181, 74, 28)
@@ -330,7 +329,7 @@ def process_file(pdf, filepath, is_first=False):
             pdf.line(pdf.l_margin, bq_y, pdf.l_margin, bq_end)
             pdf.set_line_width(0.2)
             pdf.set_text_color(26, 26, 24)
-            pdf.ln(2)
+            pdf.ln(1)
             continue
 
         # List item
@@ -348,13 +347,13 @@ def process_file(pdf, filepath, is_first=False):
         # Regular paragraph
         flush_list()
         clean = prep_text(s)
-        pdf.set_font('DejaVu', '', 12)
+        pdf.set_font('DejaVu', '', 11)
         pdf.set_text_color(26, 26, 24)
         try:
-            pdf.multi_cell(0, 7, clean, markdown=True, new_x='LMARGIN', new_y='NEXT')
+            pdf.multi_cell(0, 6, clean, markdown=True, new_x='LMARGIN', new_y='NEXT')
         except Exception:
-            pdf.multi_cell(0, 7, strip_md(clean), new_x='LMARGIN', new_y='NEXT')
-        pdf.ln(2)
+            pdf.multi_cell(0, 6, strip_md(clean), new_x='LMARGIN', new_y='NEXT')
+        pdf.ln(1)
 
     flush_list()
     if in_table:
