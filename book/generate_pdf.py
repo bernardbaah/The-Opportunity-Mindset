@@ -18,8 +18,8 @@ MARGIN  = 25.4   # 1 inch
 IMAGE_DIR = Path("/tmp/book_images")
 IMAGE_DIR.mkdir(exist_ok=True)
 
-# DejaVu Serif TTF paths (downloaded to /tmp)
-FONT_DIR  = Path("/tmp/dejavu-fonts-ttf-2.37/ttf")
+# DejaVu Serif TTF paths — committed to book/fonts/ so no download needed
+FONT_DIR  = Path(__file__).parent / "fonts"
 FONT_R    = str(FONT_DIR / "DejaVuSerif.ttf")
 FONT_B    = str(FONT_DIR / "DejaVuSerif-Bold.ttf")
 FONT_I    = str(FONT_DIR / "DejaVuSerif-Italic.ttf")
